@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muneer's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <hr style="height:1.5px;border-width:0;color:gray;background-color:gray">
+        <div style="margin-top: 3cm">
+            <div> <h1 class="typewriter line-1" id="line1"></h1></div>
+            <div style="margin-top: 0.5cm; font-style: italic; font-size: large; color: rgb(220, 219, 219)" class="typewriter line-2" id="line2"></div>
+          </div>
+    </div>
+</div>
+
+<!-- -------- ABOUT -------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <div class="card">
+                    <img src="images/user.JPEG" alt="Avatar" class="image" style="width:100%">
+                    <div class="middle">
+                        <img src="images/mail.png" style="width:100%; border-radius:0; filter:invert(1); margin-top:20px; margin-bottom:20px">
+                        <img src="images/linkedin.png" style="width:100%; border-radius:0; filter:invert(1); margin-top:20px; margin-bottom:20px">
+                        <img src="images/github.png" style="width:100%; border-radius:0; filter:invert(1); margin-top:20px; margin-bottom:20px">
+                    </div>
+                  </div>
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, consectetur. Dolorem ut consequuntur eos odit sapiente aliquam asperiores qui suscipit, exercitationem neque, eaque ab sit magnam quam odio aperiam veniam?</p>
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
+                        <li><span>Web Development</span><br>Web App Development</li>
+                        <li><span>App Development</span><br>Building Android & iOS Apps</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>2019-2020</span><br>Designing Web/App Interfaces</li>
+                        <li><span>2020-2021</span><br>Web App Development</li>
+                        <li><span>2021-2022</span><br>Building Android & iOS Apps</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
+                        <li><span>Web Development</span><br>Web App Development</li>
+                        <li><span>App Development</span><br>Building Android & iOS Apps</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link")
+        }
+
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab")
+        }
+
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab")
+    }
+</script>
+
+<script>
+    // Elements for the lines
+    const line1Element = document.getElementById('line1');
+    const line2Element = document.getElementById('line2');
+
+    // Text content for the lines
+    const line1Text = "Hi, I'm Muneer Khan...";
+    const line2Options = [
+      "Applied Mathematics Researcher",
+      "Prospective Master's Student",
+      "Management Consultant", 
+    ];
+
+    // Typewriter effect function
+    function typeText(element, text, delay = 50, callback = null) {
+      let index = 0;
+      const interval = setInterval(() => {
+        element.textContent += text.charAt(index);
+        index++;
+        if (index === text.length) {
+          clearInterval(interval);
+          if (callback) callback(); // Trigger next action when done
+        }
+      }, delay);
+    }
+
+    // Backspace effect function
+    function backspaceText(element, delay = 50, callback = null) {
+      const text = element.textContent;
+      let index = text.length;
+      const interval = setInterval(() => {
+        element.textContent = text.substring(0, index - 1);
+        index--;
+        if (index === 0) {
+          clearInterval(interval);
+          if (callback) callback(); // Trigger next action when done
+        }
+      }, delay);
+    }
+
+    // Sequential typing logic
+    function startTypewriter() {
+      // First line
+      typeText(line1Element, line1Text, 100, () => {
+        // Second line with cycling text
+        let currentOption = 0;
+        function cycleSecondLine() {
+          typeText(line2Element, line2Options[currentOption], 100, () => {
+            setTimeout(() => {
+                // Backspace the current text
+                backspaceText(line2Element, 50, () => {
+                // Move to the next option
+                currentOption = (currentOption + 1) % line2Options.length;
+                cycleSecondLine();
+                });
+              
+            }, 2000); // Pause for 2 seconds before backspacing
+          });
+        }
+        cycleSecondLine();
+      });
+    }
+
+    // Start the typewriter effect
+    startTypewriter();
+</script>
+</body>
+</html>
