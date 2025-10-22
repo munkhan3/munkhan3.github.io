@@ -31,7 +31,7 @@ html {
 body {
   margin: 0;
   font-family: "DM Serif Text", Georgia, "Times New Roman", serif;
-  background: var(--bg) url("images/moon.jpg") center top / cover no-repeat fixed;
+  background: var(--bg) center top / cover no-repeat fixed;
   color: var(--text-primary);
   min-height: 100vh;
   display: flex;
