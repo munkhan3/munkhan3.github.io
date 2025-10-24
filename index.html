@@ -33,10 +33,17 @@
     <div class="container">
       <a class="brand" href="#home">Muneer Khan</a>
       <nav class="site-links">
-        <a data-section-link href="#about">About</a>
-        <a data-section-link href="#projects">Projects</a>
-        <a data-section-link href="#blog">Blog</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-toggle-track" aria-hidden="true">
+          <span class="theme-toggle-track-sun">☀️</span>
+          <span class="theme-toggle-track-moon">🌙</span>
+        </span>
+        <span class="theme-toggle-thumb" aria-hidden="true">☀️</span>
+      </button>
       <a class="pill" href="mailto:muneer.khan.nc@gmail.com">Contact Me</a>
     </div>
   </header>
@@ -190,73 +197,136 @@
     <section id="projects" class="container section projects post-hero">
       <header class="section-header">
         <p class="eyebrow">Selected work</p>
-        <h2>Proof that thoughtful design moves the needle.</h2>
-        <p>Each case study walks through the challenge, the process, and the measurable outcomes. More work available upon request.</p>
+        <h2>A quick look at in-flight and recent builds.</h2>
+        <p>Swipe through highlight reels below, then dive deeper for full case studies, artifacts, and metrics.</p>
       </header>
-      <div class="project-filters">
-        <span class="chip is-active">All</span>
-        <span class="chip">Product</span>
-        <span class="chip">Research</span>
-        <span class="chip">Media</span>
+      <div class="projects-preview" data-carousel="projects">
+        <button class="carousel-control is-prev" type="button" aria-label="See previous projects" data-carousel-prev>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="carousel-track" data-carousel-track>
+          <article class="project-preview-card">
+            <figure class="project-preview-cover">
+              <img src="images/moon.jpg" alt="FlowSight Analytics dashboards" />
+            </figure>
+            <div class="project-preview-body">
+              <div class="project-preview-meta">
+                <span class="meta-item">2024</span>
+                <span class="meta-item">Fintech Analytics</span>
+              </div>
+              <h3>FlowSight Analytics Platform</h3>
+              <p>Scaled a configurable analytics suite with automated guardrails that brought onboarding time down by 35%.</p>
+              <ul class="project-preview-tags">
+                <li>Python</li>
+                <li>dbt</li>
+                <li>Design Systems</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-preview-card">
+            <figure class="project-preview-cover">
+              <img src="images/moon.jpg" alt="Nimbus mobile product mock" />
+            </figure>
+            <div class="project-preview-body">
+              <div class="project-preview-meta">
+                <span class="meta-item">2023</span>
+                <span class="meta-item">Mobile Product</span>
+              </div>
+              <h3>Nimbus Collaboration Hub</h3>
+              <p>Partnered with engineering to ship an AI-assisted task manager serving 250k daily users across iOS and Android.</p>
+              <ul class="project-preview-tags">
+                <li>React Native</li>
+                <li>Experimentation</li>
+                <li>Motion Design</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-preview-card">
+            <figure class="project-preview-cover">
+              <img src="images/moon.jpg" alt="CarePlus scheduling workflows" />
+            </figure>
+            <div class="project-preview-body">
+              <div class="project-preview-meta">
+                <span class="meta-item">2022</span>
+                <span class="meta-item">Healthcare Research</span>
+              </div>
+              <h3>CarePlus Patient Portal</h3>
+              <p>Reimagined care-team scheduling with participatory research that increased completed appointments by 48%.</p>
+              <ul class="project-preview-tags">
+                <li>Service Blueprinting</li>
+                <li>UX Research</li>
+                <li>Accessibility</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-preview-card">
+            <figure class="project-preview-cover">
+              <img src="images/moon.jpg" alt="Game day models" />
+            </figure>
+            <div class="project-preview-body">
+              <div class="project-preview-meta">
+                <span class="meta-item">2024</span>
+                <span class="meta-item">Sports Analytics</span>
+              </div>
+              <h3>NFL Game State Engine</h3>
+              <p>Built a live win probability model and alerting framework that fueled weekly studio segments and scouting prep.</p>
+              <ul class="project-preview-tags">
+                <li>nflverse</li>
+                <li>Machine Learning</li>
+                <li>Storytelling</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <button class="carousel-control is-next" type="button" aria-label="See next projects" data-carousel-next>
+          <span aria-hidden="true"></span>
+        </button>
       </div>
-      <div class="grid project-grid">
-        <article class="project-card">
-          <div class="project-tag">Fintech • 2024</div>
-          <h3>FlowSight Analytics Platform</h3>
-          <p>Rebuilt an enterprise dashboard with modular design-system components, reducing onboarding time by 35%.</p>
-          <ul>
-            <li>Accessibility audit & remediation</li>
-            <li>High-fidelity prototyping</li>
-            <li>Design-to-dev handoff with Storybook</li>
-          </ul>
-          <a class="text-link" href="#" target="_blank" rel="noreferrer">Read case study →</a>
-        </article>
-
-        <article class="project-card">
-          <div class="project-tag">Product Design • 2023</div>
-          <h3>Nimbus Mobile App</h3>
-          <p>Co-led design and frontend delivery for a collaborative task management app now serving 250k daily users.</p>
-          <ul>
-            <li>Design sprints & usability testing</li>
-            <li>Motion design & micro-interactions</li>
-            <li>React Native component library</li>
-          </ul>
-          <a class="text-link" href="#" target="_blank" rel="noreferrer">Prototype walkthrough →</a>
-        </article>
-
-        <article class="project-card">
-          <div class="project-tag">Research • 2022</div>
-          <h3>CarePlus Patient Portal</h3>
-          <p>Led a discovery sprint to reimagine scheduling flows, increasing successful bookings by 48%.</p>
-          <ul>
-            <li>Stakeholder workshops</li>
-            <li>Service blueprinting</li>
-            <li>Cross-platform responsive UI</li>
-          </ul>
-          <a class="text-link" href="#" target="_blank" rel="noreferrer">Project notes →</a>
-        </article>
+      <div class="section-actions">
+        <a class="secondary-btn" href="projects.html">See more projects</a>
       </div>
     </section>
 
     <section id="blog" class="container section blog post-hero">
       <header class="section-header">
         <p class="eyebrow">Notes &amp; Ideas</p>
-        <h2>Writing about data, sport, and the creative process.</h2>
-        <p>Occasional essays exploring how analytics, storytelling, and leadership intersect in product work.</p>
+        <h2>Fresh reads from the studio log.</h2>
+        <p>Short-form reflections and teardown notes. Browse a couple of the latest below, then head to the blog for the full archive.</p>
       </header>
-      <div class="grid duo blog-grid">
-        <article class="card blog-card">
-          <p class="chip is-active">Analytics</p>
+      <div class="blog-preview">
+        <article class="blog-preview-card">
+          <div class="blog-preview-meta">
+            <span class="chip is-active">Analytics</span>
+            <time datetime="2024-05">May 2024</time>
+          </div>
           <h3>Modeling Clutch Performance in the Premier League</h3>
-          <p>Combining expected threat metrics with situational play-by-play to surface midfield pairings that consistently tilt matches late.</p>
+          <p>How expected threat and live win probability reveal midfield partnerships that flip late-match leverage.</p>
           <a class="text-link" href="#" target="_blank" rel="noreferrer">Read the breakdown →</a>
         </article>
-        <article class="card blog-card">
-          <p class="chip">Process</p>
+        <article class="blog-preview-card">
+          <div class="blog-preview-meta">
+            <span class="chip">Process</span>
+            <time datetime="2024-02">Feb 2024</time>
+          </div>
           <h3>Storyboarding Product Diagnostics</h3>
-          <p>A repeatable workshop format for turning raw dashboards into narratives that teams can align around and act on quickly.</p>
+          <p>Turning raw dashboards into tight narratives teams can align around and ship against.</p>
           <a class="text-link" href="#" target="_blank" rel="noreferrer">See the framework →</a>
         </article>
+        <article class="blog-preview-card">
+          <div class="blog-preview-meta">
+            <span class="chip">Leadership</span>
+            <time datetime="2023-11">Nov 2023</time>
+          </div>
+          <h3>Designing Feedback Rhythms for Hybrid Teams</h3>
+          <p>Creating lightweight rituals and artifacts that keep distributed squads learning in lockstep.</p>
+          <a class="text-link" href="#" target="_blank" rel="noreferrer">Explore the cadence →</a>
+        </article>
+      </div>
+      <div class="section-actions">
+        <a class="secondary-btn" href="blog.html">Visit the blog</a>
       </div>
     </section>
   </main>
