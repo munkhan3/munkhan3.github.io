@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog • Muneer Khan</title>
+  <meta name="description" content="Articles covering analytics, product strategy, storytelling, and leadership by Muneer Khan." />
+  <link rel="icon" type="image/png" href="images/ai_profile.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+      },
+      options: {
+        renderActions: {
+          addMenu: []
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body class="blog-page">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html#home">Muneer Khan</a>
+      <nav class="site-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a class="is-active" href="blog.html">Blog</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-toggle-track" aria-hidden="true">
+          <span class="theme-toggle-track-sun">☀️</span>
+          <span class="theme-toggle-track-moon">🌙</span>
+        </span>
+        <span class="theme-toggle-thumb" aria-hidden="true">☀️</span>
+      </button>
+      <a class="pill" href="mailto:muneer.khan.nc@gmail.com">Contact Me</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="container section page-hero">
+      <p class="eyebrow">Notes &amp; Ideas</p>
+      <h1>Dispatches on data, sport, strategy, and creative leadership.</h1>
+      <p class="lead">Fresh thinking from the workbench—models I’m testing, workshops I’m running, and stories from the field. Search or filter by tag to jump to what you need.</p>
+    </section>
+
+    <section class="container section blog-archive">
+      <div class="blog-layout" data-blog>
+        <aside class="blog-sidebar">
+          <div class="blog-search-block">
+            <label for="blog-search" class="blog-search-label">Search posts</label>
+            <div class="blog-search-input">
+              <input id="blog-search" type="search" placeholder="Search by title, summary, or tag..." autocomplete="off" />
+              <button type="button" class="clear-search" aria-label="Clear search">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="blog-tags-block">
+            <p class="blog-filter-label">Filter by tag</p>
+            <div class="tag-filter-list" role="listbox" aria-label="Filter posts by tag">
+              <button type="button" class="tag-filter is-active" data-tag="all">All posts</button>
+              <button type="button" class="tag-filter" data-tag="analytics">Analytics</button>
+              <button type="button" class="tag-filter" data-tag="sports">Sports</button>
+              <button type="button" class="tag-filter" data-tag="product">Product</button>
+              <button type="button" class="tag-filter" data-tag="process">Process</button>
+              <button type="button" class="tag-filter" data-tag="leadership">Leadership</button>
+              <button type="button" class="tag-filter" data-tag="storytelling">Storytelling</button>
+              <button type="button" class="tag-filter" data-tag="experimentation">Experimentation</button>
+              <button type="button" class="tag-filter" data-tag="media">Media</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="blog-results" data-blog-results>
+          <div class="blog-results-meta" data-results-meta>
+            <p><span data-results-count>0</span> <span data-results-label>posts</span></p>
+          </div>
+          <div class="blog-posts" data-blog-list>
+            <p class="blog-loading">Loading recent writing…</p>
+          </div>
+          <div class="blog-empty" data-empty-message hidden>
+            <p>No posts match your filters yet. Try clearing the search or choosing a different tag.</p>
+            <button type="button" class="pill blog-reset">Reset filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="blog-modal-overlay" data-blog-modal hidden>
+    <div class="blog-modal" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
+      <button type="button" class="blog-modal-close" aria-label="Close article">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="blog-modal-body">
+        <div class="blog-modal-article-container" data-blog-modal-article tabindex="0"></div>
+        <aside class="blog-modal-outline" data-blog-modal-outline>
+          <button type="button" class="outline-toggle" data-outline-toggle aria-expanded="true">
+            Outline
+            <span class="outline-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="outline-content" data-outline-content></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Muneer Khan</p>
+      <div class="footer-links">
+        <a href="https://github.com/munkhan3" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/muneer-k" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:muneer.khan.nc@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

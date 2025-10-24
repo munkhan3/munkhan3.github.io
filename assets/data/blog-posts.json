@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2025-10-24T04:15:28Z",
+  "posts": [
+    {
+      "slug": "measuring-the-hidden-value-of-two-minute-drills",
+      "title": "Measuring the Hidden Value of Two-Minute Drills",
+      "date": "2024-06-18",
+      "displayDate": "June 18, 2024",
+      "summary": "Quantifying how teams capitalize on late-half possessions with a custom leverage model.",
+      "tags": [
+        "Analytics",
+        "Sports",
+        "Experimentation"
+      ],
+      "readingTime": "8 min read",
+      "deck": "Inside the live leverage model that helps coaching staffs squeeze extra possessions out of the final 120 seconds.",
+      "html": "<h2 id=\"why-two-minute-drills-matter\">Why Two-Minute Drills Matter</h2><p>Two-minute situations swing an entire win probability chart faster than almost any other sequence. By pairing drive level win probability deltas with timeout inventory, we identify when an offense should lean into the sideline, press tempo, or force the defense to burn clock.</p><ul><li>We bucket possessions by clock, score state, and remaining timeouts for both teams.</li><li>Each play is graded against historical leverage to highlight when play callers leave free win probability on the field.</li><li>Staffs receive a weekly scout packet summarizing opponent tendencies in the final two minutes of each half.</li></ul><h2 id=\"model-architecture\">Model Architecture</h2><p>The engine blends logistic regression with gradient boosted calibration layers to keep predictions stable in outlier situations. We train the core model on <em>nflverse</em> play-by-play data, then feed situational priors derived from coaching self-scout sessions.</p><figure><strong>Drive state outputs</strong><p>The model emits a probability vector for burn, tempo, and strike calls given the next snap context. Assistants receive this matrix on tablets between plays.</p><figcaption>Example drive state transitions used during our sideline huddles.</figcaption></figure><h3 id=\"calibration-windows\">Calibration windows</h3><p>Win probability is recalibrated every Tuesday using the latest league data so crews always have the freshest baselines entering the weekend.</p><h2 id=\"sideline-operations\">Sideline Operations</h2><p>Analytics only helps if it survives the chaos of the sideline. We built a simple sideline dashboard that surfaces actionable prompts, not just numbers.</p><ol><li>Color-coded prompts for play caller, situational assistant, and game management lead.</li><li>Automatic reminders to force defensive timeouts when leverage crosses our stop-loss threshold.</li><li>Post-game review clips stitched to model inflection points for film breakdown.</li></ol><h2 id=\"game-day-checklist\">Game Day Checklist</h2><ul><li>Confirm timeout burn rules with coaching staff Saturday night.</li><li>Preload opponent blitz and prevent tendencies into the dashboard queue.</li><li>Assign an analyst to track sideline prompts to ensure nothing slips through the headset.</li></ul>"
+    },
+    {
+      "slug": "designing-feedback-rhythms-for-hybrid-teams",
+      "title": "Designing Feedback Rhythms for Hybrid Teams",
+      "date": "2024-05-02",
+      "displayDate": "May 2, 2024",
+      "summary": "Crafting lightweight rituals so distributed squads surface insights fast without losing cohesion.",
+      "tags": [
+        "Process",
+        "Leadership",
+        "Storytelling"
+      ],
+      "readingTime": "6 min read",
+      "deck": "Designing lightweight rituals that keep hybrid teams aligned without overwhelming their calendars.",
+      "html": "<h2 id=\"cadence-architecture\">Cadence Architecture</h2><p>We anchor the week with three touchpoints: a Monday intent sync, midweek async loom check-ins, and a Friday retro jam. Each ritual has a template that keeps conversation focused on signal, not status.</p><h3 id=\"what-we-cover-on-mondays\">What we cover on Mondays</h3><p>Teams open with a one slide intent canvas: desired outcomes, potential blockers, and support asks. Every line ties back to an OKR metric so leadership can triage help quickly.</p><h2 id=\"feedback-loops-that-stick\">Feedback Loops That Stick</h2><p>Hybrid teams crave context. We overlay quantitative dashboards with story snippets from customer calls, then summarize the impact in a two minute async clip. The result: everyone understands why work matters before they dive into execution.</p><blockquote><p>\"The loom recaps mean I never walk into standup cold. I know which decisions need me and which are already moving.\" \u2014 Staff PM</p></blockquote><h2 id=\"toolkit-templates\">Toolkit &amp; Templates</h2><p>Every ritual ships with a duplicatable template. We version them in Notion so squads can tweak frameworks without breaking consistency.</p><ul><li><strong>Intent Canvas:</strong> Aligns team bets to measurable outcomes.</li><li><strong>Signal Log:</strong> Captures user anecdotes, experiment reads, and risks.</li><li><strong>Decision Digest:</strong> Weekly summary with RACI owners and timestamps.</li></ul><h2 id=\"what-to-try-next\">What To Try Next</h2><p>Start small: pilot the cadence with one squad for two sprints. Capture feedback, trim steps that feel heavy, and expand once the rhythm feels natural.</p>"
+    },
+    {
+      "slug": "storyboarding-product-diagnostics",
+      "title": "Storyboarding Product Diagnostics",
+      "date": "2024-02-11",
+      "displayDate": "February 11, 2024",
+      "summary": "A workshop format that reframes telemetry into narrative arcs so product squads align on the 'why' before sprint planning the 'how.'",
+      "tags": [
+        "Process",
+        "Product",
+        "Storytelling"
+      ],
+      "readingTime": "7 min read",
+      "deck": "How we turn messy telemetry into a storyboard the entire product trio can act on.",
+      "html": "<h2 id=\"framing-the-narrative\">Framing the Narrative</h2><p>Every diagnostic starts with a narrative spine: protagonist (customer), conflict (friction), resolution (product bet). We map data points to each beat so charts back the story instead of overwhelming it.</p><ul><li>Define the protagonist by persona, moment, and motivation.</li><li>Highlight the conflict with quantified friction paired with verbatim quotes.</li><li>Position the resolution as a testable hypothesis with leading indicators.</li></ul><h2 id=\"workshop-agenda\">Workshop Agenda</h2><p>The storyboard session runs 90 minutes and mixes async prep with live synthesis.</p><ol><li><strong>Pre-read deck:</strong> 10 slides, consumed async, includes narrative spine and data appendix.</li><li><strong>Workshop:</strong> 45 minutes of co-creation using Miro frames that force prioritization.</li><li><strong>Commitment:</strong> 30 minutes to assign owners, define counter-metrics, and schedule validation.</li></ol><h2 id=\"artifacts-that-travel\">Artifacts That Travel</h2><p>We package outputs into a one-page pilot brief, a six-slide stakeholder share-out, and a loom walkthrough. That triple threat covers tactical planning, executive alignment, and async onboarding for new collaborators.</p><h2 id=\"starter-kit\">Starter Kit</h2><p>Grab the storyboard template, pre-fill it with a real friction point, and test it with your next cross-functional swarm. Iteration beats over-planning.</p>"
+    },
+    {
+      "slug": "building-live-win-probability-graphics-for-broadcast",
+      "title": "Building Live Win Probability Graphics for Broadcast",
+      "date": "2023-12-05",
+      "displayDate": "December 5, 2023",
+      "summary": "Behind the scenes on translating a win probability engine into studio-ready visuals and commentator talking points.",
+      "tags": [
+        "Analytics",
+        "Sports",
+        "Media"
+      ],
+      "readingTime": "9 min read",
+      "deck": "Making real-time analytics broadcast-friendly without losing analytical rigor.",
+      "html": "<h2 id=\"graphics-pipeline\">Graphics Pipeline</h2><p>We render win probability in under 500ms by chaining a lightweight API with a viz layer powered by WebGL. The graphics team receives a JSON payload containing current win probability, change over the last snap, and contextual copy suggestions.</p><h3 id=\"latency-budget\">Latency budget</h3><p>Anything over half a second feels laggy to producers. Caching and pre-fetching common scenarios keep the pipeline snappy.</p><h2 id=\"handling-edge-cases\">Handling Edge Cases</h2><p>Broadcasts hate surprises. We flag weird scenarios\u2014botched laterals, multiple penalties, double timeouts\u2014and freeze the graphic until an analyst confirms the data. A manual override ensures on-air talent never cites a bogus number.</p><h2 id=\"commentary-integration\">Commentary Integration</h2><p>We work with talent every Thursday to script story starters tied to expected spikes. When the model flags a swing, a pre-written nugget appears in the prompter so commentary sounds prepared, not robotic.</p><h2 id=\"studio-rundown\">Studio Rundown</h2><ul><li>Rehearse the biggest leverage swings with talent before going live.</li><li>Pair every number with a human story\u2014matchups, coaching history, or situational tendencies.</li><li>Always show the delta, not just the absolute win probability. Movement tells the story.</li></ul>"
+    },
+    {
+      "slug": "operationalizing-experiments-at-scale",
+      "title": "Operationalizing Experiments at Scale",
+      "date": "2023-09-19",
+      "displayDate": "September 19, 2023",
+      "summary": "Embedding experiment design, telemetry, and readout cadences into every squad so learnings compound without slowing roadmap velocity.",
+      "tags": [
+        "Leadership",
+        "Product",
+        "Experimentation"
+      ],
+      "readingTime": "6 min read",
+      "deck": "A lightweight operating system that lets product squads ship experiments weekly without burning out.",
+      "html": "<h2 id=\"guardrails-for-velocity\">Guardrails for Velocity</h2><p>We define a single experiment charter: hypothesis, primary metric, guardrail metric, and stop condition. Anything missing? The experiment waits. This keeps the queue clean and the blast radius small.</p><h2 id=\"experiment-lifecycle\">Experiment Lifecycle</h2><p>Every test moves through four consistent states.</p><ol><li><strong>Pitch:</strong> 5-minute async loom sells the upside.</li><li><strong>Prep:</strong> Analytics partners wire telemetry and QA guardrails.</li><li><strong>Run:</strong> Daily pulse checks to catch anomalies early.</li><li><strong>Harvest:</strong> 48-hour turnaround for insight memos and follow-up recommendations.</li></ol><h2 id=\"decision-forum\">Decision Forum</h2><p>We host a bi-weekly growth council that reviews learnings, greenlights rollouts, and backlogs follow-up ideas. The panel includes product, engineering, design, research, and finance so decisions stick.</p><h2 id=\"playbook-download\">Playbook Download</h2><p>Clone the experiment tracker, drop in your next hypothesis, and commit to a single ops rhythm for one quarter. Consistency drives compounding insight.</p>"
+    },
+    {
+      "slug": "a-playbook-for-translating-models-into-momentum",
+      "title": "A Playbook for Translating Models into Momentum",
+      "date": "2023-06-30",
+      "displayDate": "June 30, 2023",
+      "summary": "How to turn statistical outputs into narratives that executives grasp quickly, align around, and resource without hesitation.",
+      "tags": [
+        "Analytics",
+        "Product",
+        "Storytelling"
+      ],
+      "readingTime": "5 min read",
+      "deck": "Bridging complex models to executive decisions with narratives that move resources.",
+      "html": "<h2 id=\"translation-layer\">Translation Layer</h2><p>Executives do not want coefficients\u2014they want leverage. We translate model outputs into three ladders: size of prize, confidence, and actions required. Every ladder fits on one slide.</p><h2 id=\"packaging-insights\">Packaging Insights</h2><p>Our insight memo structure keeps attention on what matters.</p><ul><li><strong>Headline:</strong> One sentence that answers \"why now\".</li><li><strong>Evidence:</strong> Three bullet proof points, each backed by a chart and a quote.</li><li><strong>Decision:</strong> Clear asks with owner, timeline, and investment level.</li></ul><h2 id=\"operating-rhythm\">Operating Rhythm</h2><p>We reserve 20 minutes in the weekly exec sync for analytics-led momentum pitches. That slot has a hard rule: show unfinished work, invite feedback, and secure commitment before leaving the room.</p><h2 id=\"executive-ready-checklist\">Executive Ready Checklist</h2><ul><li>Lead with business outcomes before you mention model accuracy.</li><li>Pre-wire stakeholders with a one-page brief so the live meeting is about decisions.</li><li>Close every presentation with next steps, not next analysis.</li></ul>"
+    },
+    {
+      "slug": "building-story-sense-in-analytics-teams",
+      "title": "Building Story Sense in Analytics Teams",
+      "date": "2023-03-04",
+      "displayDate": "March 4, 2023",
+      "summary": "Teaching analysts narrative structure, pacing, and delivery so insights stick with stakeholders long after the deck closes.",
+      "tags": [
+        "Leadership",
+        "Storytelling",
+        "Media"
+      ],
+      "readingTime": "6 min read",
+      "deck": "Helping analysts upgrade from dashboards to compelling stories.",
+      "html": "<h2 id=\"training-analysts-as-storytellers\">Training Analysts as Storytellers</h2><p>We built a six-week micro curriculum covering narrative arcs, pacing, and delivery. Analysts pair up to critique each other's dry runs so everyone gets reps delivering insights out loud.</p><h2 id=\"story-sprints\">Story Sprints</h2><p>Each sprint ends with a story room: analysts pitch a three minute story to cross-functional peers. Feedback focuses on clarity and resonance, not SQL.</p><h3 id=\"feedback-rubric\">Feedback rubric</h3><p>We grade on hook strength, data-to-story linkage, and the explicit call to action.</p><h2 id=\"distribution-channels\">Distribution Channels</h2><p>Stories travel farther when they live where teams already hang out. We cut 60-second highlight reels for Slack, publish long-form breakdowns in Notion, and host lunch-and-learns for deeper dives.</p><h2 id=\"coaching-notes\">Coaching Notes</h2><p>Encourage analysts to keep a swipe file of great stories. Then practice, practice, practice\u2014the reps build confidence faster than any template.</p>"
+    }
+  ]
+}
