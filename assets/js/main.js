@@ -887,9 +887,10 @@ const applyTheme = (theme) => {
   htmlEl.style.colorScheme = normalized;
   const toggleBtn = document.querySelector(".theme-toggle");
   if (toggleBtn) {
+    toggleBtn.dataset.theme = normalized;
     const thumb = toggleBtn.querySelector(".theme-toggle-thumb");
     if (thumb) {
-      thumb.textContent = normalized === "dark" ? "🌙" : "☀️";
+      thumb.textContent = "";
     }
     toggleBtn.setAttribute("aria-label", normalized === "dark" ? "Switch to light mode" : "Switch to dark mode");
   }
