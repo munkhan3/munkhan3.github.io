@@ -6,6 +6,8 @@ if (yearEl) {
 }
 
 const rolesTarget = document.querySelector(".typed-role");
+const heroNameEl = document.querySelector('.hero-name');
+const headerBrand = document.querySelector('.brand');
 
 if (rolesTarget) {
   const raw = rolesTarget.dataset.roles || "";
@@ -130,6 +132,12 @@ if (dotLinks.length || headerLinks.length) {
     bodyEl.classList.toggle("dot-nav-visible", !!showNav);
     bodyEl.classList.add("dot-nav-evaluated");
     bodyEl.classList.toggle("has-scrolled", window.scrollY > 0);
+
+    if (headerBrand && heroNameEl) {
+      const heroRect = heroNameEl.getBoundingClientRect();
+      const showBrand = heroRect.bottom <= 40;
+      bodyEl.classList.toggle("brand-visible", showBrand);
+    }
   };
 
   const requestUpdate = () => {
