@@ -1,6 +1,20 @@
 {
-  "generatedAt": "2025-10-24T04:15:28Z",
+  "generatedAt": "2025-10-25T15:35:17Z",
   "posts": [
+    {
+      "slug": "visualizations-of-feature-selection-shrinkage-in-linear-models",
+      "title": "Visualizations of Feature Selection & Shrinkage in Linear Models",
+      "date": "2025-10-25",
+      "displayDate": "October 25, 2025",
+      "summary": "A few visualizations that explore how different feature selection and shrinkage methods in linear regression operate using Ordinary Least Squares (OLS) as a baseline. Methods include ridge regression, ridgeless regression, LASSO regression, elastic nets, and best subset / heuristics.",
+      "tags": [
+        "Regression Theory",
+        "Statistics"
+      ],
+      "readingTime": "\"15 min read\"   # optional, auto-calculated when omitted",
+      "deck": "\"Exploring feature selection and shrinkage in linear models\"  # optional",
+      "html": "<h2 id=\"motivation-introduction\">Motivation &amp; Introduction</h2><p>Body content in Markdown\u2026</p><h2 id=\"the-basic-linear-model-ols\">The Basic Linear Model - OLS</h2><h2 id=\"feature-selection\">Feature Selection</h2><h2 id=\"feature-shrinkage\">Feature Shrinkage</h2><h2 id=\"a-combination\">A Combination?</h2>"
+    },
     {
       "slug": "measuring-the-hidden-value-of-two-minute-drills",
       "title": "Measuring the Hidden Value of Two-Minute Drills",
