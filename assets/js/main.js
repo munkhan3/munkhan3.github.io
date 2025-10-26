@@ -6,8 +6,8 @@ if (yearEl) {
 }
 
 const rolesTarget = document.querySelector(".typed-role");
-const heroNameEl = document.querySelector('.hero-name');
-const headerBrand = document.querySelector('.brand');
+const heroNameEl = document.querySelector(".hero-name");
+const headerBrand = document.querySelector(".brand");
 
 if (rolesTarget) {
   const raw = rolesTarget.dataset.roles || "";
@@ -106,6 +106,7 @@ if (dotLinks.length || headerLinks.length) {
   };
 
   const aboutSection = document.getElementById("about");
+  const canAnimateBrand = !!(headerBrand && heroNameEl && document.body.classList.contains("single-page"));
 
   let ticking = false;
   const updateActive = () => {
@@ -133,7 +134,7 @@ if (dotLinks.length || headerLinks.length) {
     bodyEl.classList.add("dot-nav-evaluated");
     bodyEl.classList.toggle("has-scrolled", window.scrollY > 0);
 
-    if (headerBrand && heroNameEl) {
+    if (canAnimateBrand) {
       const heroRect = heroNameEl.getBoundingClientRect();
       const showBrand = heroRect.bottom <= 40;
       bodyEl.classList.toggle("brand-visible", showBrand);
@@ -324,6 +325,8 @@ const slugify = (raw) => {
     .replace(/-+/g, "-");
 };
 
+const normalizeTagValue = (tag) => slugify(tag || "");
+
 const DEFAULT_POST_CONTENT = {
   slug: "__default__",
   title: "Article coming soon",
@@ -344,8 +347,16 @@ function createBlogPostCard(post) {
   const article = document.createElement("article");
   article.className = "blog-post";
   article.dataset.slug = post.slug || "";
-  article.dataset.tags = Array.isArray(post.tags)
-    ? post.tags.map((tag) => String(tag).toLowerCase()).join(" ")
+  const tagSlugs = Array.isArray(post.tags)
+    ? post.tags
+        .map((tag) => normalizeTagValue(tag))
+        .filter(Boolean)
+    : [];
+  article.dataset.tags = tagSlugs.join(",");
+  article.dataset.tagsText = Array.isArray(post.tags)
+    ? post.tags
+        .map((tag) => String(tag).toLowerCase())
+        .join(" ")
     : "";
   article.dataset.title = post.title || "";
   article.dataset.summary = post.summary || "";
@@ -359,6 +370,7 @@ function createBlogPostCard(post) {
   article.setAttribute("data-date", article.dataset.date);
   article.setAttribute("data-reading-time", article.dataset.readingTime);
   article.setAttribute("data-tags", article.dataset.tags);
+  article.setAttribute("data-tags-text", article.dataset.tagsText);
   article.tabIndex = 0;
 
   const meta = document.createElement("div");
@@ -458,6 +470,56 @@ function renderBlogPosts(posts) {
   return renderedPosts;
 }
 
+function renderTagFilters(posts) {
+  const blogRoot = document.querySelector("[data-blog]");
+  if (!blogRoot) {
+    return;
+  }
+  const tagList =
+    blogRoot.querySelector("[data-tag-filter-list]") || blogRoot.querySelector(".tag-filter-list");
+  if (!tagList) {
+    return;
+  }
+
+  const tagMeta = new Map();
+  posts.forEach((post) => {
+    if (!post || !Array.isArray(post.tags)) {
+      return;
+    }
+    post.tags.forEach((tag) => {
+      const slug = normalizeTagValue(tag);
+      if (!slug) {
+        return;
+      }
+      if (!tagMeta.has(slug)) {
+        tagMeta.set(slug, { label: tag, count: 0 });
+      }
+      tagMeta.get(slug).count += 1;
+    });
+  });
+
+  tagList.innerHTML = "";
+  const allButton = document.createElement("button");
+  allButton.type = "button";
+  allButton.className = "tag-filter is-active";
+  allButton.dataset.tag = "all";
+  allButton.textContent = "All posts";
+  tagList.appendChild(allButton);
+
+  const sorted = Array.from(tagMeta.entries()).sort((a, b) =>
+    a[1].label.localeCompare(b[1].label, undefined, { sensitivity: "base" }),
+  );
+
+  sorted.forEach(([slug, meta]) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "tag-filter";
+    button.dataset.tag = slug;
+    button.textContent = meta.count > 1 ? `${meta.label} (${meta.count})` : meta.label;
+    tagList.appendChild(button);
+  });
+}
+
 function initBlogModal(posts) {
   const overlay = document.querySelector("[data-blog-modal]");
   if (!overlay) return;
@@ -466,10 +528,9 @@ function initBlogModal(posts) {
   const articleContainer = overlay.querySelector("[data-blog-modal-article]");
   const outlineContainer = overlay.querySelector("[data-outline-content]");
   const outlineWrap = overlay.querySelector("[data-blog-modal-outline]");
-  const outlineToggle = overlay.querySelector("[data-outline-toggle]");
   const closeBtn = overlay.querySelector(".blog-modal-close");
 
-  if (!modal || !articleContainer || !outlineContainer || !outlineWrap || !outlineToggle || !closeBtn) {
+  if (!modal || !articleContainer || !outlineContainer || !outlineWrap || !closeBtn) {
     return;
   }
 
@@ -477,7 +538,7 @@ function initBlogModal(posts) {
 
   const resetOutline = () => {
     outlineWrap.classList.remove("is-collapsed");
-    outlineToggle.setAttribute("aria-expanded", "true");
+    outlineWrap.setAttribute("aria-hidden", "false");
   };
 
   const cleanupOverlay = () => {
@@ -507,7 +568,7 @@ function initBlogModal(posts) {
       if (!overlay.hidden) {
         cleanupOverlay();
       }
-    }, 260);
+    }, OVERLAY_TRANSITION_DURATION);
 
     if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
       lastFocusedElement.focus();
@@ -629,10 +690,7 @@ function initBlogModal(posts) {
     }, 20);
   };
 
-  outlineToggle.addEventListener("click", () => {
-    const isCollapsed = outlineWrap.classList.toggle("is-collapsed");
-    outlineToggle.setAttribute("aria-expanded", String(!isCollapsed));
-  });
+  // Outline is static; no collapse/expand toggle required.
 
   outlineContainer.addEventListener("click", (event) => {
     const link = event.target.closest(".outline-link");
@@ -742,17 +800,18 @@ function initBlogFilters() {
     let visible = 0;
 
     posts.forEach((post) => {
-      const tagValues = (post.dataset.tags || "").toLowerCase();
-      const title = (post.dataset.title || post.textContent || "").toLowerCase();
-      const summary = (post.dataset.summary || "").toLowerCase();
+    const tagValues = post.dataset.tags || "";
+    const title = (post.dataset.title || post.textContent || "").toLowerCase();
+    const summary = (post.dataset.summary || "").toLowerCase();
+    const tagText = post.dataset.tagsText || "";
 
-      const tagList = tagValues.split(/\s+/).filter(Boolean);
-      const matchesTag = tag === "all" || tagList.includes(tag);
-      const matchesQuery =
-        !query ||
-        title.includes(query) ||
-        summary.includes(query) ||
-        tagValues.includes(query);
+    const tagList = tagValues ? tagValues.split(",").filter(Boolean) : [];
+    const matchesTag = tag === "all" || tagList.includes(tag);
+    const matchesQuery =
+      !query ||
+      title.includes(query) ||
+      summary.includes(query) ||
+      tagText.includes(query);
 
       const isVisible = matchesTag && matchesQuery;
       post.hidden = !isVisible;
@@ -853,6 +912,7 @@ function loadBlogData() {
       blogPostContent.clear();
       blogPostContent.set("__default__", DEFAULT_POST_CONTENT);
 
+      renderTagFilters(posts);
       const rendered = renderBlogPosts(posts);
       if (rendered.length) {
         initBlogModal(rendered);
@@ -886,6 +946,86 @@ function loadBlogData() {
 
 loadBlogData();
 
+const PAGE_EXIT_DURATION = 160;
+const OVERLAY_TRANSITION_DURATION = 260;
+
+function initPageTransitions() {
+  const body = document.body;
+  if (!body) {
+    return;
+  }
+
+  const mediaQuery =
+    typeof window !== "undefined" && window.matchMedia
+      ? window.matchMedia("(prefers-reduced-motion: reduce)")
+      : null;
+
+  const prefersReducedMotion = () => !!(mediaQuery && mediaQuery.matches);
+
+  const handleLinkClick = (event) => {
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    const link = event.target.closest("a");
+    if (!link) {
+      return;
+    }
+
+    if ((link.target && link.target !== "_self") || link.hasAttribute("download")) {
+      return;
+    }
+
+    if (link.dataset.noTransition === "true" || link.dataset.pdf) {
+      return;
+    }
+
+    const href = link.getAttribute("href");
+    if (
+      !href ||
+      href.startsWith("#") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("tel:")
+    ) {
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(href, window.location.href);
+    } catch (err) {
+      return;
+    }
+
+    if (url.origin !== window.location.origin) {
+      return;
+    }
+
+    if (url.href === window.location.href) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (prefersReducedMotion()) {
+      window.location.href = url.href;
+      return;
+    }
+
+    body.classList.add("is-page-transitioning");
+    window.setTimeout(() => {
+      window.location.href = url.href;
+    }, PAGE_EXIT_DURATION);
+  };
+
+  document.addEventListener("click", handleLinkClick);
+  window.addEventListener("pageshow", () => {
+    body.classList.remove("is-page-transitioning");
+  });
+}
+
+initPageTransitions();
+
 const THEME_STORAGE_KEY = "mk-theme";
 
 const applyTheme = (theme) => {
@@ -904,15 +1044,8 @@ const applyTheme = (theme) => {
   }
 };
 
-const detectPreferredTheme = () => {
-  if (typeof window === "undefined" || !window.matchMedia) {
-    return "light";
-  }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-};
-
 const storedTheme = typeof window !== "undefined" ? window.localStorage.getItem(THEME_STORAGE_KEY) : null;
-applyTheme(storedTheme || detectPreferredTheme());
+applyTheme(storedTheme || "dark");
 
 const themeToggle = document.querySelector(".theme-toggle");
 if (themeToggle) {
@@ -921,15 +1054,5 @@ if (themeToggle) {
     const nextTheme = isDark ? "light" : "dark";
     applyTheme(nextTheme);
     window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-  });
-}
-
-if (typeof window !== "undefined" && window.matchMedia) {
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
-    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored) {
-      return;
-    }
-    applyTheme(event.matches ? "dark" : "light");
   });
 }

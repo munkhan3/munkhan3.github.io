@@ -25,12 +25,12 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 </head>
-<body class="blog-page">
+<body class="blog-page theme-dark">
   <header class="site-header">
     <div class="container">
       <a class="brand" href="index.html#home">Muneer Khan</a>
       <nav class="site-links">
-        <a href="about.html">About</a>
+        <a href="index.html#about">About</a>
         <a href="projects.html">Projects</a>
         <a class="is-active" href="blog.html">Blog</a>
       </nav>
@@ -65,16 +65,8 @@
 
           <div class="blog-tags-block">
             <p class="blog-filter-label">Filter by tag</p>
-            <div class="tag-filter-list" role="listbox" aria-label="Filter posts by tag">
+            <div class="tag-filter-list" role="listbox" aria-label="Filter posts by tag" data-tag-filter-list>
               <button type="button" class="tag-filter is-active" data-tag="all">All posts</button>
-              <button type="button" class="tag-filter" data-tag="analytics">Analytics</button>
-              <button type="button" class="tag-filter" data-tag="sports">Sports</button>
-              <button type="button" class="tag-filter" data-tag="product">Product</button>
-              <button type="button" class="tag-filter" data-tag="process">Process</button>
-              <button type="button" class="tag-filter" data-tag="leadership">Leadership</button>
-              <button type="button" class="tag-filter" data-tag="storytelling">Storytelling</button>
-              <button type="button" class="tag-filter" data-tag="experimentation">Experimentation</button>
-              <button type="button" class="tag-filter" data-tag="media">Media</button>
             </div>
           </div>
         </aside>
@@ -101,14 +93,13 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="blog-modal-body">
-        <div class="blog-modal-article-container" data-blog-modal-article tabindex="0"></div>
         <aside class="blog-modal-outline" data-blog-modal-outline>
-          <button type="button" class="outline-toggle" data-outline-toggle aria-expanded="true">
-            Outline
-            <span class="outline-caret" aria-hidden="true">▾</span>
-          </button>
+          <header class="outline-card-header">
+            <p class="outline-title">Outline</p>
+          </header>
           <div class="outline-content" data-outline-content></div>
         </aside>
+        <div class="blog-modal-article-container" data-blog-modal-article tabindex="0"></div>
       </div>
     </div>
   </div>
