@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog Post • Muneer Khan</title>
+  <meta name="description" content="Detailed article from Muneer Khan's blog." />
+  <link rel="icon" type="image/png" href="../images/ai_profile.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+      },
+      options: {
+        renderActions: {
+          addMenu: []
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body class="blog-post-page theme-dark">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html#home">Muneer Khan</a>
+      <nav class="site-links">
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a class="is-active" href="../blog.html">Blog</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-toggle-thumb" aria-hidden="true"></span>
+        </button>
+        <a class="pill" href="mailto:muneer.khan.nc@gmail.com">Contact Me</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container section blog-post-layout">
+      <aside class="post-outline" data-post-outline hidden>
+        <button type="button" class="outline-toggle" data-outline-toggle aria-expanded="true" aria-label="Toggle outline">
+          <span class="outline-toggle-icon" aria-hidden="true"><span></span></span>
+          <span class="outline-toggle-label">Outline</span>
+        </button>
+        <nav class="outline-nav" data-outline-nav>
+          <ul class="outline-items" data-outline-items></ul>
+        </nav>
+      </aside>
+
+      <article class="blog-post-detail" data-blog-post>
+        <header class="blog-post-hero">
+          <p class="eyebrow" data-post-eyebrow>Blog Post</p>
+          <h1 data-post-title>Loading…</h1>
+          <p class="post-deck" data-post-deck hidden></p>
+          <div class="blog-post-meta detail-meta" data-post-meta hidden></div>
+        </header>
+        <div class="blog-post-body" data-blog-post-content>
+          <p class="post-loading">Loading article…</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Muneer Khan</p>
+      <div class="footer-links">
+        <a href="https://github.com/munkhan3" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/muneer-k" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:muneer.khan.nc@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
