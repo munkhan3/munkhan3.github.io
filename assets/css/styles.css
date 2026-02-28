@@ -102,3 +102,15 @@ main { padding-top: 7rem; padding-bottom: 4rem; }
   }
   .mosaic .hidden-mobile { display: none; }
 }
+
+.footer {
+  margin-top: 2rem;
+  padding: 1rem 0 2rem;
+  border-top: 1px solid #e4e4e7;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer a { color: #444; text-decoration: none; margin-right: .75rem; }
+.footer a:hover { text-decoration: underline; }
