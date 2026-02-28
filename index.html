@@ -3,66 +3,128 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Muneer's Portfolio</title>
-  <meta name="description" content="Muneer Khan blends data science, applied math, and creative storytelling to build human-centered experiences." />
-  <link rel="icon" type="image/png", href="images/ai_profile.png"/>
+  <title>Muneer Khan | Portfolio</title>
+  <meta name="description" content="Portfolio of Muneer Khan featuring professional experience, projects, and writing." />
+  <link rel="icon" type="image/png" href="images/portfolio/avatar.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body class="single-page theme-dark">
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="#home">Muneer Khan</a>
-      <nav class="site-links">
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="blog.html">Blog</a>
-      </nav>
-      <div class="header-actions">
-        <button class="theme-toggle" type="button" aria-label="Toggle theme">
-          <span class="theme-toggle-thumb" aria-hidden="true"></span>
-        </button>
-        <a class="pill" href="mailto:muneer.khan.nc@gmail.com">Contact Me</a>
-      </div>
-    </div>
+<body data-base-path="">
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <nav class="nav-shell" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <img src="images/portfolio/avatar.webp" alt="Muneer Khan" width="36" height="36" />
+        <span>Muneer Khan</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="site-menu" class="menu-list">
+        <li><a data-nav href="index.html">Home</a></li>
+        <li><a data-nav href="experience.html">Experience</a></li>
+        <li><a data-nav href="projects.html">Projects</a></li>
+        <li><a data-nav href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main>
-    <section id="home" class="hero container">
-      <div class="hero-copy">
-        <p class="hero-name accent">Muneer Khan</p>
-        <h1>
-        <span class="typed-role" data-roles='["Data Scientist","Applied Math Researcher","Videographer","NFL Enthusiast"]'></span>
-        </h1>
-        <p>I use quantitative analysis of data to help teams make informed decisions. My background spans data analysis, financial modeling, and strategy. I enjoy taking complex problems, breaking them down with rigorous analytics, and using the output to drive strategy.</p>
-        <div class="cta-group">
-          <a class="secondary-btn" href="about.html">About Me</a>
-          <a class="primary-btn" href="projects.html">View Projects</a>
-          <a class="secondary-btn" href="blog.html">Read Blog</a>
-        </div>
-      </div>
-      <div class="hero-portrait">
-        <div class="portrait-frame">
-          <img src="images/ai_profile.png" alt="Portrait of Muneer Khan" />
-          <span class="portrait-glow" aria-hidden="true"></span>
-          <div class="portrait-social">
-            <a class="social-icon" href="https://github.com/munkhan3" target="_blank" rel="noreferrer" aria-label="GitHub">
-              <img src="images/github.png" alt="" />
-            </a>
-            <a class="social-icon" href="https://www.linkedin.com/in/muneer-k" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <img src="images/linkedin.png" alt="" />
-            </a>
-            <a class="social-icon" href="mailto:muneer.khan.nc@gmail.com" aria-label="Email">
-              <img src="images/mail.png" alt="" />
-            </a>
-          </div>
-        </div>
+  <main class="site-main site-column">
+    <section class="hero-block reveal">
+      <p class="hero-kicker">Data Scientist · Applied Math · Software Builder</p>
+      <h1>Building practical systems and clear stories from complex data.</h1>
+      <p>
+        I am Muneer Khan, focused on analytics, product-minded engineering, and communication that helps teams make better decisions.
+        This portfolio is a clean home for my work, experience, and writing.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="projects.html">View Projects</a>
+        <a class="btn" href="experience.html">See Experience</a>
+        <a class="btn" href="blog.html">Read Blog</a>
       </div>
     </section>
 
+    <section class="photo-grid reveal" aria-label="Photo gallery">
+      <img src="images/portfolio/with-vetaia.webp" alt="Muneer with a teammate" loading="eager" />
+      <img src="images/portfolio/profile.webp" alt="Portrait of Muneer" loading="eager" class="tall" />
+      <img src="images/portfolio/with-aeron.webp" alt="Muneer with a friend" loading="eager" />
+      <img src="images/portfolio/with-vishant.webp" alt="Muneer with a colleague" loading="lazy" class="wide" />
+      <img src="images/portfolio/with-loni.webp" alt="Muneer at an event" loading="lazy" class="tall" />
+      <img src="images/portfolio/with-loni-lanu.webp" alt="Muneer with peers" loading="lazy" />
+    </section>
+
+    <section class="section-block reveal">
+      <div class="section-head">
+        <h2>Featured Projects</h2>
+        <a href="projects.html">See all</a>
+      </div>
+      <div class="card-list">
+        <article class="card">
+          <h3>NFL Win Probability Engine</h3>
+          <p>Built a live game-state model and visualization workflow for faster sideline and broadcast insights.</p>
+          <p class="meta">Python · Modeling · Visualization</p>
+        </article>
+        <article class="card">
+          <h3>Pricing Optimization Lab</h3>
+          <p>Designed constrained optimization experiments to evaluate price tiers and demand tradeoffs.</p>
+          <p class="meta">Optimization · Analytics · Strategy</p>
+        </article>
+        <article class="card">
+          <h3>Retention Signal Observatory</h3>
+          <p>Shipped early-warning churn diagnostics with repeatable intervention playbooks for customer teams.</p>
+          <p class="meta">Data Science · Product · Metrics</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block reveal">
+      <div class="section-head">
+        <h2>Experience Snapshot</h2>
+        <a href="experience.html">Full timeline</a>
+      </div>
+      <div class="card-list">
+        <article class="card">
+          <h3>Data Scientist</h3>
+          <p>Built predictive models and decision tools that translated directly into product and business actions.</p>
+        </article>
+        <article class="card">
+          <h3>Applied Math Researcher</h3>
+          <p>Applied statistical and optimization methods to practical systems with measurable outcomes.</p>
+        </article>
+        <article class="card">
+          <h3>Technical Storyteller</h3>
+          <p>Turned complex analysis into concise narratives, dashboards, and presentations for stakeholders.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block reveal" data-recent-posts>
+      <div class="section-head">
+        <h2>Recent Writing</h2>
+        <a href="blog.html">All posts</a>
+      </div>
+      <div class="card-list" data-recent-posts-list>
+        <article class="card">
+          <h3>Loading latest posts...</h3>
+        </article>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© <span data-year></span> Muneer Khan</p>
+    <div>
+      <a href="https://github.com/munkhan3" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/muneer-k" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="mailto:muneer.khan.nc@gmail.com">Email</a>
+    </div>
+  </footer>
+
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
