@@ -12,14 +12,11 @@
 <body>
   <header class="topbar">
     <nav class="nav container">
-      <a class="brand" href="index.html">
-        <img src="assets/images/logo.webp" alt="Muneer Khan" />
-      </a>
-      <button class="menu-btn" aria-label="Toggle menu">☰</button>
-      <ul class="nav-links">
+      <a class="brand" href="index.html"><span class="brand-mark">MK</span></a>
+      <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu">☰</button>
+      <ul class="nav-links" id="site-menu">
         <li><a class="active" href="index.html">Home</a></li>
         <li><a href="projects/index.html">Projects</a></li>
-        <li><a href="skills/index.html">Skills</a></li>
         <li><a href="experience/index.html">Experience</a></li>
         <li><a href="blogs/index.html">Blogs</a></li>
       </ul>
@@ -27,60 +24,100 @@
   </header>
 
   <main class="container">
-  <section class="hero">
-    <h1>Hi, I'm Muneer</h1>
-    <p>
-      I’m a software engineering student focused on web development,
-      DevOps, and building practical systems that solve real problems.
-    </p>
-  </section>
-  <section class="stack">
-  <h2>Top Projects</h2>
-  <div class="cards">
-    <article class="card"><h3>Project One</h3><p>Short description.</p></article>
-    <article class="card"><h3>Project Two</h3><p>Short description.</p></article>
-    <article class="card"><h3>Project Three</h3><p>Short description.</p></article>
-  </div>
-</section>
+    <section class="hero">
+      <h1>Hi, I'm Muneer</h1>
+      <p>
+        I use quantitative analysis of data to help teams make informed decisions. My background spans data analysis, financial modeling, and strategy. I enjoy taking complex problems, breaking them down with rigorous analytics, and using the output to drive strategy.
+      </p>
+      <div class="hero-actions">
+        <a href="projects/index.html">View Projects</a>
+        <a href="experience/index.html">Experience</a>
+        <a href="blogs/index.html">Read Blogs</a>
+      </div>
+    </section>
 
-<section class="stack">
-  <h2>My Skills</h2>
-  <div class="cards">
-    <article class="card"><h3>Languages</h3><p>C++, Go, TypeScript</p></article>
-    <article class="card"><h3>Frontend</h3><p>Astro, React, SvelteKit</p></article>
-    <article class="card"><h3>Backend</h3><p>Node.js, PostgreSQL</p></article>
-  </div>
-</section>
+    <section class="stack">
+      <h2>Top Projects</h2>
+      <div class="cards">
+        <article class="card">
+          <h3><a href="projects/index.html">Projects Coming Soon</a></h3>
+          <p>I am currently preparing this section and will publish projects soon.</p>
+        </article>
+        <article class="card">
+          <h3><a href="projects/index.html">Case Studies In Progress</a></h3>
+          <p>This will include technical details, outcomes, and links to source work.</p>
+        </article>
+        <article class="card">
+          <h3><a href="projects/index.html">Open Source Highlights</a></h3>
+          <p>Selected public repos and practical builds will be listed here.</p>
+        </article>
+      </div>
+    </section>
 
-<section class="stack">
-  <h2>Recent Experience</h2>
-  <div class="cards">
-    <article class="card"><h3>Role One</h3><p>Organization + brief impact.</p></article>
-    <article class="card"><h3>Role Two</h3><p>Organization + brief impact.</p></article>
-    <article class="card"><h3>Role Three</h3><p>Organization + brief impact.</p></article>
-  </div>
-</section>
+    <section class="stack">
+      <h2>My Skills</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Languages</h3>
+          <p>C++, Go, TypeScript</p>
+        </article>
+        <article class="card">
+          <h3>Frontend</h3>
+          <p>Astro, React, SvelteKit</p>
+        </article>
+        <article class="card">
+          <h3>Backend</h3>
+          <p>Node.js, PostgreSQL</p>
+        </article>
+      </div>
+    </section>
 
-<section class="stack">
-  <h2>Latest Blogs</h2>
-  <div class="cards">
-    <article class="card"><h3>Blog Title 1</h3><p>Date + summary.</p></article>
-    <article class="card"><h3>Blog Title 2</h3><p>Date + summary.</p></article>
-    <article class="card"><h3>Blog Title 3</h3><p>Date + summary.</p></article>
-  </div>
-</section>
+    <section class="stack">
+      <h2>Recent Experience</h2>
+      <div class="cards">
+        <article class="card">
+          <h3><a href="experience/index.html">Experience Timeline Coming Soon</a></h3>
+          <p>This section will capture roles, responsibilities, and impact.</p>
+        </article>
+        <article class="card">
+          <h3><a href="experience/index.html">Leadership & Mentoring</a></h3>
+          <p>Academic mentoring and technical leadership highlights will appear here.</p>
+        </article>
+        <article class="card">
+          <h3><a href="experience/index.html">Internship & Work History</a></h3>
+          <p>I will add real entries as they are finalized.</p>
+        </article>
+      </div>
+    </section>
 
+    <section class="stack">
+      <h2>Latest Blogs</h2>
+      <div class="cards">
+        <article class="card">
+          <h3><a href="blogs/index.html">Blog Launching Soon</a></h3>
+          <p>First posts are being drafted and will be published soon.</p>
+        </article>
+        <article class="card">
+          <h3><a href="blogs/index.html">Technical Notes</a></h3>
+          <p>Short write-ups on what I learn while building software.</p>
+        </article>
+        <article class="card">
+          <h3><a href="blogs/index.html">Project Lessons</a></h3>
+          <p>Retrospectives and lessons learned from practical work.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <script src="assets/js/main.js"></script>
   <footer class="footer container">
-  <p>© 2026 Muneer Khan</p>
-  <div>
-    <a href="https://github.com/munkhan3" target="_blank" rel="noreferrer">GitHub</a>
-    <a href="https://www.linkedin.com/in/muneer-k/" target="_blank" rel="noreferrer">LinkedIn</a>
-    <a href="mailto:muneer.khan.nc@gmail.com">Email</a>
-  </div>
-</footer>
+    <p>© 2026 Muneer Khan</p>
+    <div>
+      <a href="https://github.com/munkhan3" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/muneer-k/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="mailto:muneer.khan.nc@gmail.com">Email</a>
+    </div>
+  </footer>
 
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
