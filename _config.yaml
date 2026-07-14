@@ -1,0 +1,18 @@
+title: Muneer Kha
+description: Digital Portfolio & Blog
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+defaults:
+  - scope: 
+      path: "blogs"
+    values: 
+      layout: "blog-post"
+  
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
