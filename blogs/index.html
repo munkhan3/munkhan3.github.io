@@ -5,7 +5,9 @@ title: Blog
 <div class="blog-index">
   <h1>Blog</h1>
 
-  {% assign posts = site.pages | where_exp: "p", "p.path contains 'blogs/' and p.path != page.path and p.title" %}
+  {% assign posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" %}
+  {% assign posts = posts | where_exp: "p", "p.path != page.path" %}
+  {% assign posts = posts | where_exp: "p", "p.title" %}
   {% assign grouped = posts | group_by_exp: "p", "p.path | split: '/' | slice: 1, 1 | first" %}
   {% assign grouped = grouped | sort: "name" %}
 
