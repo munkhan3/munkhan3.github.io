@@ -12,8 +12,8 @@ img, picture { max-width: 100%; display: block; }
   --color-border: #e3e5e9;
   --color-accent: #3b5bdb;
   --color-accent-muted: #eef1fd;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-sans: "Young Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-serif: "EB Garamond", Georgia, "Times New Roman", serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -119,6 +119,10 @@ main { min-height: 60vh; padding-bottom: 4rem; }
 
 /* Single post */
 .post-header { margin-bottom: 2.5rem; }
+.post {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
 
 .post-meta {
   font-size: 0.85rem;
