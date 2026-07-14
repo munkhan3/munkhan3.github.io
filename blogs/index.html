@@ -1,0 +1,30 @@
+---
+layout: default
+title: Blog
+---
+<div class="blog-index">
+  <h1>Blog</h1>
+
+  {% assign posts = site.pages | where_exp: "p", "p.path contains 'blogs/' and p.path != page.path and p.title" %}
+  {% assign grouped = posts | group_by_exp: "p", "p.path | split: '/' | slice: 1, 1 | first" %}
+  {% assign grouped = grouped | sort: "name" %}
+
+  {% for group in grouped %}
+    <section class="category-group">
+      <h2 class="category-title">{{ group.name | replace: '-', ' ' }}</h2>
+      <ul class="post-list">
+        {% assign sorted_items = group.items | sort: "date" | reverse %}
+        {% for post in sorted_items %}
+          <li class="post-item">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="post-item-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+
+  {% if posts.size == 0 %}
+    <p>No posts yet — add a markdown file under <code>blogs/&lt;category&gt;/</code> to get started.</p>
+  {% endif %}
+</div>
