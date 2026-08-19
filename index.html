@@ -3,7 +3,72 @@ layout: default
 title: Home
 ---
 <section class="hero">
-  <h1>Muneer Khan</h1>
-  <p class="hero-subtitle">Notes on machine learning, probability, and whatever else I'm working through.</p>
-  <p><a href="{{ '/blogs/' | relative_url }}">Read the blog →</a></p>
+  <h1><span id="typing-text"></span><span id="typing-cursor" class="typing-cursor" aria-hidden="true"></span></h1>
 </section>
+
+<section class="about">
+  <p>I enjoy taking on seemingly impossible problems with creative approaches and using the output to drive strategy. I use quantitative analysis of data to help teams make informed decisions. My background spans data science / machine learning, financial modeling, and strategy.</p>
+  <p>Currently, I'm working on my Statistics M.S. at the University of Chicago. I just finished up a summer internship at SpaceX as a Data Scientist on the Starlink team, where I stood up a survival model. Previously, I worked at Deloitte as a Strategy Consultant.</p>
+</section>
+
+<section class="timeline-section">
+  <h2>Experience</h2>
+
+  <div class="timeline-tabs">
+    <input type="radio" name="timeline-tab" id="timeline-tab-education" class="timeline-tab-input" checked>
+    <input type="radio" name="timeline-tab" id="timeline-tab-professional" class="timeline-tab-input">
+
+    <div class="timeline-tab-nav">
+      <label for="timeline-tab-education" class="timeline-tab-label">Education</label>
+      <label for="timeline-tab-professional" class="timeline-tab-label">Professional</label>
+    </div>
+
+    <div class="timeline-tab-panel" data-panel="education">
+      <ol class="timeline">
+        {% assign education = site.data.timeline | where: "category", "education" %}
+        {% for item in education %}
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <details class="timeline-content">
+            <summary class="timeline-summary">
+              <div class="timeline-date">{{ item.date }}</div>
+              <h3 class="timeline-title">{{ item.title }}</h3>
+              <div class="timeline-org">{{ item.org }} · {{ item.location }}</div>
+            </summary>
+            {% if item.bullets %}
+            <ul class="timeline-bullets">
+              {% for b in item.bullets %}<li>{{ b }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+          </details>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="timeline-tab-panel" data-panel="professional">
+      <ol class="timeline">
+        {% assign professional = site.data.timeline | where: "category", "professional" %}
+        {% for item in professional %}
+        <li class="timeline-item">
+          <span class="timeline-marker"></span>
+          <details class="timeline-content">
+            <summary class="timeline-summary">
+              <div class="timeline-date">{{ item.date }}</div>
+              <h3 class="timeline-title">{{ item.title }}</h3>
+              <div class="timeline-org">{{ item.org }} · {{ item.location }}</div>
+            </summary>
+            {% if item.bullets %}
+            <ul class="timeline-bullets">
+              {% for b in item.bullets %}<li>{{ b }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+          </details>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script src="{{ '/assets/js/typing.js' | relative_url }}" defer></script>

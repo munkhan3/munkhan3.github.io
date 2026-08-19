@@ -1,0 +1,63 @@
+- date: "Jun. 2026 – Present"
+  category: "professional"
+  title: "Data Science Intern"
+  org: "SpaceX – Starlink"
+  location: "Hawthorne, CA"
+  bullets:
+    - "Independently spearheaded a shift from subscriber-count indexing to cash-flow indexing by building a survival model to forecast customer survival probability over time; integrated outputs with financials to quantify value-at-risk across the subscriber base, improving revenue projections by ~$100M annualized"
+    - "Partnered with software engineering teams to implement resulting process changes into production systems, driving ~$20M in additional annualized revenue and cost savings"
+    - "Built a pricing simulator incorporating demand elasticity"
+
+- date: "Sep. 2025 – Present"
+  category: "education"
+  title: "M.S. Statistics"
+  org: "University of Chicago"
+  location: "Chicago, IL"
+  bullets:
+    - "Notable coursework: Algorithmic Game Theory, Modern Applied Statistics, Time Series, Options Theory, Applied Linear Statistical Models"
+
+- date: "May 2024 – Sep. 2025"
+  category: "professional"
+  title: "Part-Time Researcher – Mathematical Biology"
+  org: "Duke Department of Mathematics"
+  location: "Remote – Durham, NC"
+  bullets:
+    - "Developed computational models of linkage-mediating protein dynamics by numerically solving systems of 2-state and 4-state reaction-diffusion PDEs in Python; optimized parameters via non-linear least squares and used FFTs and ETD Runge-Kutta schemes to approximate solutions"
+    - "Presented reaction-diffusion animation results to a 6-person interdisciplinary research team; incorporated iterative input including extending the initial model to 3D, adding spatially dependent reaction rate schemes, and cleansing new noisy experimental data via adaptive thresholding techniques"
+
+- date: "Sep. 2023 – Jun. 2026"
+  category: "professional"
+  title: "Business Analyst / Consultant"
+  org: "Deloitte Consulting"
+  location: "Chicago, IL"
+  bullets:
+    - "Developed a financial model with unique metrics quantifying monetary value, operational value, and risk measures of ~60 cost reduction opportunities for a ~$20B insurance firm; presented results and recommendations to the COO, directly leading to ~$7M in savings"
+    - "Co-developed strategy for an $80B+ commercial bank to enable post-merger migration of ~85K clients from 1 legacy platform to 2 newly acquired systems; built a segmentation model synthesizing 28+ data sources to decision target platform, service tier, and inactivity for each client"
+    - "Designed and delivered comprehensive pitch decks incorporating detailed financial models, organizational models, engagement history, and future engagement opportunities for meetings with bank CEOs, directly resulting in ~$5M+ in sales"
+    - "Led strategy design and execution for a conversion effort of ~47K clients shifting to mobile multi-factor authentication; presented data-driven insights to C-suite executives to inform rollout prioritization, issue management, and reporting/tracking"
+
+- date: "Jun. 2022 – Aug. 2022"
+  category: "professional"
+  title: "Business Analyst Intern"
+  org: "Deloitte Consulting"
+  location: "Boston, MA"
+  bullets:
+    - "Analyzed key financial revenue data and designed profitability metrics for product offerings of a health insurance client; built an automated analytics dashboard to inform selection of product-packaging strategies, increasing profit margins by ~20%"
+    - "Analyzed and researched operations and process models of a $150B+ client to identify concerns/opportunities for post-merger integration of the financial-close process; built a prioritization framework and business unit impact heat map to drive process flow recommendations"
+
+- date: "Jan. 2022 – May 2023"
+  category: "professional"
+  title: "Undergraduate Researcher – Financial Mathematics"
+  org: "Duke Department of Mathematics"
+  location: "Durham, NC"
+  bullets:
+    - "Investigated valuation discrepancies in options contracts due to skew and kurtosis in implied/historical state price probability distributions; built and backtested 3 options trading strategies, 2 of which yielded Sharpe ratios of 1.4–1.9 and annualized returns of ~20%"
+    - "Developed numerically approximated solutions to the Heston model in Python that forecasted European call option prices within 2% error"
+
+- date: "Aug. 2019 – May 2023"
+  category: "education"
+  title: "B.S. Mathematics, B.S. Computer Science"
+  org: "Duke University"
+  location: "Durham, NC"
+  bullets:
+    - "Notable coursework: Theory & Algorithms of Machine Learning, Artificial Intelligence, Probability, Data Analysis & Decision Sciences, Abstract Algebra, Real Analysis, Mathematics of Financial Derivatives, Derivatives for Speculation & Risk Management, Differential Equations"

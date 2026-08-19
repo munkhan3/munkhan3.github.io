@@ -1,0 +1,21 @@
+---
+layout: default
+title: Projects
+---
+<div class="projects-page">
+  <h1>Projects</h1>
+  <div class="project-grid">
+    {% for project in site.data.projects %}
+    <article class="project-card">
+      <div class="project-card-header">
+        <h2>{{ project.name }}</h2>
+        <span class="project-date">{{ project.date }}</span>
+      </div>
+      <div class="project-meta">{{ project.tech }}</div>
+      <ul class="project-bullets">
+        {% for b in project.bullets %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</div>

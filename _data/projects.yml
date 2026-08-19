@@ -1,0 +1,16 @@
+- name: "Algorithmic Trading Bot"
+  tech: "Python / TWS API"
+  date: "Jun. 2026 – Present"
+  location: "Chicago, IL"
+  bullets:
+    - "Built a live trading system on IBKR running 3 concurrent strategies, generating a 6% return over a 2-month trading period (Sharpe 0.9)"
+    - "Designed and implemented a standalone risk engine computing position-level VaR (historical / parametric), portfolio volatility via rolling covariance matrix, and correlation-adjusted exposure limits to prevent concentrated risk across correlated instruments"
+    - "Implemented volatility-scaled position sizing (inverse-vol weighting) and a portfolio-level max drawdown circuit breaker (5%), automatically de-risking or halting strategies when realized volatility exceeded historical thresholds"
+
+- name: "Poker Solver"
+  tech: "Counterfactual Regret Minimization / Reinforcement Learning / Python"
+  date: "Apr. 2026 – May 2026"
+  location: "Chicago, IL"
+  bullets:
+    - "Implemented Counterfactual Regret Minimization (CFR) to compute near-Nash equilibrium strategies for Kuhn poker, modeling the game as an extensive-form game with imperfect information and iterative regret-matching over information sets"
+    - "Built a best-response solver to measure strategy exploitability, validating convergence to within ~0.15 mbb/hand of Nash equilibrium after ~50K training iterations"

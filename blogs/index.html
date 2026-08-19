@@ -5,6 +5,11 @@ title: Blog
 <div class="blog-index">
   <h1>Blog</h1>
 
+  <blockquote class="blog-intro-quote">
+    <p><strong>The important thing is not to stop questioning.</strong> Curiosity has its own reason for existence. One cannot help but be in awe when he contemplates the mysteries of eternity, of life, of the marvelous structure of reality. <strong>It is enough if one tries merely to comprehend a little of this mystery each day.</strong></p>
+    <cite>— Albert Einstein</cite>
+  </blockquote>
+
   {% assign posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" %}
   {% assign posts = posts | where_exp: "p", "p.path != page.path" %}
   {% assign posts = posts | where_exp: "p", "p.title" %}
