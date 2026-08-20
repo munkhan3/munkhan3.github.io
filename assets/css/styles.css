@@ -44,6 +44,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* The pill overrides the shared container padding, so reserve its own gutter.
+     Below 760px the auto margins collapse and it would otherwise touch the edges. */
+  max-width: min(760px, calc(100% - 2rem));
   padding: 0.85rem 1.75rem;
   border: 1px solid var(--color-border);
   border-radius: 999px;
@@ -360,13 +363,27 @@ main { min-height: 60vh; padding-bottom: 4rem; }
   pointer-events: none;
 }
 
-.post-preview-link:hover .post-preview-card,
+/* Hover reveal only where a real pointer exists; touch uses .preview-open (see preview-tap.js) */
+@media (hover: hover) {
+  .post-preview-link:hover .post-preview-card,
+  .post-item-link:hover .post-preview-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
 .post-preview-link:focus .post-preview-card,
-.post-item-link:hover .post-preview-card,
-.post-item-link:focus .post-preview-card {
+.post-item-link:focus .post-preview-card,
+.preview-open .post-preview-card {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* On touch, a blog-list title should just open the post — no preview step */
+@media (hover: none) {
+  .post-item-link .post-preview-card { display: none; }
 }
 
 .post-preview-title {
@@ -411,16 +428,40 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .site-nav { flex-direction: column; align-items: flex-start; gap: 0.5rem; border-radius: 1.5rem; position: static; }
-  .site-nav-links a { margin-left: 0; margin-right: 1.25rem; }
+  /* Scale the whole design down ~1pt; everything is sized in rem so spacing follows suit.
+     This alone keeps the nav pill on one line — no stacking needed. */
+  html { font-size: 91.7%; }
+
   .post-header h1 { font-size: 1.6rem; }
   .blog-filters { flex-direction: column; }
   .project-card { padding: 1.25rem; }
+
+  /* A button is shrink-to-fit by default, which left the menu anchored to a wider box */
+  .tag-dropdown-trigger { width: 100%; }
+  .tag-dropdown-menu { left: 0; right: 0; min-width: 0; }
+
+  /* Anchor the preview to the viewport so it can never overflow a narrow screen */
+  .post-preview-card {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    top: auto;
+    width: auto;
+    max-width: none;
+    margin-bottom: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .post-item { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+  .project-card-header { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
 }
 
 /* Home */
 .hero { padding: 2rem 0 1.5rem; }
-.hero h1 { font-size: 2.25rem; }
+.hero h1 { font-size: clamp(1.6rem, 7vw, 2.25rem); }
 
 .typing-cursor {
   display: inline-block;

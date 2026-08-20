@@ -5,6 +5,8 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  # U+FE0E forces text presentation so iOS doesn't render the backlink as an emoji
+  footnote_backlink: "&#8617;&#xfe0e;"
 
 defaults:
   - scope:
