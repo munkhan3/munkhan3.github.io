@@ -246,7 +246,7 @@ main { min-height: 60vh; padding-bottom: 4rem; }
   border-bottom: 1px dotted var(--color-accent);
 }
 
-.post-preview-link:hover { border-bottom-style: solid; }
+.post-preview-link:hover { border-bottom-style: solid; text-decoration: none; }
 
 .post-preview-card {
   display: block;
@@ -520,4 +520,14 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
 @media (max-width: 600px) {
   .project-card { padding: 1.25rem; }
+}
+
+.footnotes {
+  font-size: 0.85rem;
+  color: #424242;
+  line-height: 1.25;
+}
+
+.footnotes li p {
+  margin: 0;
 }
