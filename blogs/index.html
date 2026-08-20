@@ -13,25 +13,58 @@ title: Blog
   {% assign posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" %}
   {% assign posts = posts | where_exp: "p", "p.path != page.path" %}
   {% assign posts = posts | where_exp: "p", "p.title" %}
-  {% assign grouped = posts | group_by_exp: "p", "p.path | split: '/' | slice: 1, 1 | first" %}
-  {% assign grouped = grouped | sort: "name" %}
+  {% assign posts = posts | sort: "date" | reverse %}
 
-  {% for group in grouped %}
-    <section class="category-group">
-      <h2 class="category-title">{{ group.name | replace: '-', ' ' }}</h2>
-      <ul class="post-list">
-        {% assign sorted_items = group.items | sort: "date" | reverse %}
-        {% for post in sorted_items %}
-          <li class="post-item">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            <span class="post-item-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-          </li>
+  {% assign subject_string = "" %}
+  {% for post in posts %}
+    {% assign subject_slug = post.path | split: '/' | slice: 1, 1 | first %}
+    {% assign subject_string = subject_string | append: subject_slug | append: "," %}
+  {% endfor %}
+  {% assign all_subjects = subject_string | split: "," | uniq | sort %}
+
+  {% if posts.size > 0 %}
+  <div class="blog-filters">
+    <input type="text" id="blog-search" class="blog-search-input" placeholder="Search">
+    <div class="tag-dropdown" id="tag-dropdown">
+      <button type="button" class="tag-dropdown-trigger" id="tag-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+        <span class="tag-dropdown-label">All Topics</span>
+        <svg class="tag-dropdown-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="tag-dropdown-menu" id="tag-dropdown-menu" role="listbox" hidden>
+        <li class="tag-dropdown-option active" role="option" tabindex="0" data-subject="" aria-selected="true">All Topics</li>
+        {% for s in all_subjects %}
+          <li class="tag-dropdown-option" role="option" tabindex="0" data-subject="{{ s }}" aria-selected="false">{{ s | replace: '-', ' ' }}</li>
         {% endfor %}
       </ul>
-    </section>
-  {% endfor %}
+    </div>
+  </div>
 
-  {% if posts.size == 0 %}
+  <ul class="post-list" id="blog-post-list">
+    {% for post in posts %}
+      {% assign post_subject = post.path | split: '/' | slice: 1, 1 | first %}
+      <li class="post-item" data-subject="{{ post_subject }}" data-tags="{{ post.tags | join: ',' | downcase }}" data-title="{{ post.title | downcase }}" data-keywords="{{ post.keywords | join: ',' | downcase }}">
+        <div class="post-item-main">
+          {% if post.description %}
+          <a href="{{ post.url | relative_url }}" class="post-item-link">
+            {{ post.title }}
+            <span class="post-preview-card">
+              {% if post.tags %}<span class="post-preview-tags">{{ post.tags | join: ', ' | replace: '-', ' ' }}</span>{% endif %}
+              <span class="post-preview-excerpt">{{ post.description }}</span>
+            </span>
+          </a>
+          {% else %}
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          {% endif %}
+        </div>
+        <span class="post-item-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p id="blog-empty-state" class="blog-empty-state" hidden>No posts match your filters.</p>
+  {% else %}
     <p>No posts yet — add a markdown file under <code>blogs/&lt;category&gt;/</code> to get started.</p>
   {% endif %}
 </div>
+
+<script src="{{ '/assets/js/blog-filter.js' | relative_url }}" defer></script>

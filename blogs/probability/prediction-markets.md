@@ -1,8 +1,9 @@
 ---
 title: "The Price Is (Probably) Right"
 date: 2026-03-16
-tags: [game-theory, mechanism-design, prediction-markets]
+tags: [game-theory, prediction-markets]
 description: "Kalshi says Duke has a 20% chance to win March Madness. How do they know?"
+keywords: [kalshi, duke basketball, march madness, betting odds]
 ---
 
 <h3>The House Always Wins</h3>
