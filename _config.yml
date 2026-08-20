@@ -7,11 +7,11 @@ kramdown:
   syntax_highlighter: rouge
 
 defaults:
-  - scope: 
+  - scope:
       path: "blogs"
-    values: 
+    values:
       layout: "blog-post"
-  
+
 exclude:
   - Gemfile
   - Gemfile.lock

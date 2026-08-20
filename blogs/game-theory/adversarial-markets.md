@@ -6,7 +6,7 @@ description: "Are you confident that you know more than your opponent?"
 keywords: [kalshi, adverse selection, information asymmetry, bayesian inference]
 ---
 
-We have {% include post-preview-link.html path="blogs/game-theory/prediction-markets.md" text="talked previously" %} about how prediction markets are closer to stock markets than betting markets. You name a price, Kalshi checks its book, and either you take someone's offer or yours gets added there until somebody else takes it. Either way, since you're not taking up positions against Kalshi, it's technically not gambling -- in the legal sense of the word.[^1]
+We have {% include post-preview-link.html path="blogs/probability/prediction-markets.md" text="talked previously" %} about how prediction markets are closer to stock markets than betting markets. You name a price, Kalshi checks its book, and either you take someone's offer or yours gets added there until somebody else takes it. Either way, since you're not taking up positions against Kalshi, it's technically not gambling -- in the legal sense of the word.[^1]
 
 If you’re a bit more thorough though, you should stop to think about _who is on the other side of your trade_. You might imagine that someone who's jumping at the chance to take your bet could know something that you don't. Consider the following toy example:
 

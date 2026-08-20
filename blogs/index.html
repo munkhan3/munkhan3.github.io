@@ -15,12 +15,12 @@ title: Blog
   {% assign posts = posts | where_exp: "p", "p.title" %}
   {% assign posts = posts | sort: "date" | reverse %}
 
-  {% assign subject_string = "" %}
+  {% assign topic_string = "" %}
   {% for post in posts %}
-    {% assign subject_slug = post.path | split: '/' | slice: 1, 1 | first %}
-    {% assign subject_string = subject_string | append: subject_slug | append: "," %}
+    {% assign topic_slug = post.path | split: '/' | slice: 1, 1 | first %}
+    {% assign topic_string = topic_string | append: topic_slug | append: "," %}
   {% endfor %}
-  {% assign all_subjects = subject_string | split: "," | uniq | sort %}
+  {% assign all_topics = topic_string | split: "," | uniq | sort %}
 
   {% if posts.size > 0 %}
   <div class="blog-filters">
@@ -31,9 +31,9 @@ title: Blog
         <svg class="tag-dropdown-chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <ul class="tag-dropdown-menu" id="tag-dropdown-menu" role="listbox" hidden>
-        <li class="tag-dropdown-option active" role="option" tabindex="0" data-subject="" aria-selected="true">All Topics</li>
-        {% for s in all_subjects %}
-          <li class="tag-dropdown-option" role="option" tabindex="0" data-subject="{{ s }}" aria-selected="false">{{ s | replace: '-', ' ' }}</li>
+        <li class="tag-dropdown-option active" role="option" tabindex="0" data-topic="" aria-selected="true">All Topics</li>
+        {% for t in all_topics %}
+          <li class="tag-dropdown-option" role="option" tabindex="0" data-topic="{{ t }}" aria-selected="false">{{ t | replace: '-', ' ' }}</li>
         {% endfor %}
       </ul>
     </div>
@@ -41,8 +41,8 @@ title: Blog
 
   <ul class="post-list" id="blog-post-list">
     {% for post in posts %}
-      {% assign post_subject = post.path | split: '/' | slice: 1, 1 | first %}
-      <li class="post-item" data-subject="{{ post_subject }}" data-tags="{{ post.tags | join: ',' | downcase }}" data-title="{{ post.title | downcase }}" data-keywords="{{ post.keywords | join: ',' | downcase }}">
+      {% assign post_topic = post.path | split: '/' | slice: 1, 1 | first %}
+      <li class="post-item" data-topic="{{ post_topic }}" data-tags="{{ post.tags | join: ',' | downcase }}" data-title="{{ post.title | downcase }}" data-keywords="{{ post.keywords | join: ',' | downcase }}">
         <div class="post-item-main">
           {% if post.description %}
           <a href="{{ post.url | relative_url }}" class="post-item-link">

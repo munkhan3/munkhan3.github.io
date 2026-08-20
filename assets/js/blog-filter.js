@@ -9,7 +9,7 @@
   var emptyState = document.getElementById("blog-empty-state");
   if (!items.length) return;
 
-  var selectedSubject = "";
+  var selectedTopic = "";
 
   function applyFilters() {
     var query = ((searchInput && searchInput.value) || "").trim().toLowerCase();
@@ -19,15 +19,15 @@
       var itemTags = (item.dataset.tags || "").split(",").filter(Boolean);
       var itemKeywords = (item.dataset.keywords || "").split(",").filter(Boolean);
       var title = item.dataset.title || "";
-      var subject = item.dataset.subject || "";
+      var topic = item.dataset.topic || "";
 
-      var matchesSubject = !selectedSubject || subject === selectedSubject;
+      var matchesTopic = !selectedTopic || topic === selectedTopic;
       var matchesSearch = !query
         || title.indexOf(query) !== -1
         || itemTags.some(function (t) { return t.indexOf(query) !== -1; })
         || itemKeywords.some(function (k) { return k.indexOf(query) !== -1; });
 
-      var visible = matchesSubject && matchesSearch;
+      var visible = matchesTopic && matchesSearch;
       item.hidden = !visible;
       if (visible) visibleCount++;
     });
@@ -50,7 +50,7 @@
   }
 
   function selectOption(opt) {
-    selectedSubject = opt.dataset.subject || "";
+    selectedTopic = opt.dataset.topic || "";
     if (label) label.textContent = opt.textContent;
     options.forEach(function (o) {
       o.classList.remove("active");
