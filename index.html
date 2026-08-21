@@ -8,17 +8,31 @@ title: Home
   <h1><span id="typing-text"></span><span id="typing-cursor" class="typing-cursor" aria-hidden="true"></span></h1>
 </section>
 
+{% comment %}
+  Scroll hint. Hidden until reveal.js shows it, and only ever shown if the visitor has not
+  scrolled by the time the headline lands. The rail matches <main>'s column geometry so the
+  chevron sits on the same left edge as everything else on the page.
+{% endcomment %}
+<div class="scroll-cue-rail" aria-hidden="true">
+  <span class="scroll-cue" hidden>
+    <svg viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="2.4"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1 1l11 11L23 1" />
+    </svg>
+  </span>
+</div>
+
 <section class="about">
-  <p>I enjoy taking on seemingly impossible problems with creative approaches and using the output to drive strategy. I use quantitative analysis of data to help teams make informed decisions. My background spans data science / machine learning, financial modeling, and strategy.</p>
-  <p>Currently, I'm working on my Statistics M.S. at the University of Chicago. I just finished up a summer internship at SpaceX as a Data Scientist on the Starlink team, where I stood up a survival model. Previously, I worked at Deloitte as a Strategy Consultant.</p>
+  <p class="reveal">I enjoy taking on seemingly impossible problems with creative approaches and using the output to drive strategy. I use quantitative analysis of data to help teams make informed decisions. My background spans data science / machine learning, financial modeling, and strategy.</p>
+  <p class="reveal">Currently, I'm working on my Statistics M.S. at the University of Chicago. I just finished up a summer internship at SpaceX as a Data Scientist on the Starlink team, where I stood up a survival model. Previously, I worked at Deloitte as a Strategy Consultant.</p>
 </section>
 
-<section class="timeline-section">
+<section class="timeline-section reveal">
   <h2>Education</h2>
   {% include timeline-list.html category="education" hide_dates=true hide_location=true plain_bullets=true %}
 </section>
 
-<section class="timeline-section">
+<section class="timeline-section reveal">
   <h2>Experience</h2>
 
   <div class="timeline-tabs">
@@ -40,4 +54,6 @@ title: Home
   </div>
 </section>
 
+{% comment %} reveal.js must bind its listener before typing.js starts dispatching {% endcomment %}
+<script src="{{ '/assets/js/reveal.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/typing.js' | relative_url }}" defer></script>

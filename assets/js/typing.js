@@ -1,7 +1,10 @@
 (function () {
   var phases = [
     { text: "Hi!", pause: 1000, append: false },
-    { text: "Hi! I'm Muneer", pause: 5000, append: true },
+    // `cue` marks the phase after which the scroll hint may appear (see reveal.js).
+    // Flagging it on the phase rather than by index means these can be reordered or
+    // reworded without silently breaking the cue.
+    { text: "Hi! I'm Muneer", pause: 5000, append: true, cue: true },
     { text: "Data Scientist", pause: 1400, append: false },
     { text: "Researcher", pause: 1400, append: false },
     { text: "Videographer", pause: 1400, append: false }
@@ -45,6 +48,9 @@
         setTimeout(function () { typeStep(pos + 1); }, typingSpeed);
       } else {
         if (cursor) cursor.classList.add("blink");
+        document.dispatchEvent(new CustomEvent("typing:phase-done", {
+          detail: { cue: !!phase.cue }
+        }));
         setTimeout(nextPhase, phase.pause);
       }
     }

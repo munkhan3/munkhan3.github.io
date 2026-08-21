@@ -13,6 +13,7 @@ img, picture { max-width: 100%; display: block; }
   --color-border: #e5dccd;
   --color-accent: #b5502e;
   --color-accent-muted: #f7e6de;
+  --color-accent-glow: rgba(181, 80, 46, 0.5);
   --shadow-soft: 0 6px 20px rgba(26, 20, 12, 0.08);
   --shadow-raised: 0 10px 28px rgba(26, 20, 12, 0.14);
   --syntax-keyword: #c2185b;
@@ -37,6 +38,7 @@ img, picture { max-width: 100%; display: block; }
   --color-border: #352f27;
   --color-accent: #e08a63;
   --color-accent-muted: #3a251c;
+  --color-accent-glow: rgba(224, 138, 99, 0.55);
   --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.45);
   --shadow-raised: 0 10px 28px rgba(0, 0, 0, 0.55);
   --syntax-keyword: #f48fb1;
@@ -55,6 +57,7 @@ img, picture { max-width: 100%; display: block; }
     --color-border: #352f27;
     --color-accent: #e08a63;
     --color-accent-muted: #3a251c;
+    --color-accent-glow: rgba(224, 138, 99, 0.55);
     --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.45);
     --shadow-raised: 0 10px 28px rgba(0, 0, 0, 0.55);
     --syntax-keyword: #f48fb1;
@@ -522,6 +525,68 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   .project-card-header { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
 }
 
+/* Scroll hint
+   The reveal design hides everything below the hero, which also removes the sliver of
+   next-section content that normally signals "there is more". Overlay scrollbars on macOS
+   and iOS mean there is no other cue either, so this stands in for it. Shown only by
+   reveal.js, and only when the visitor has not already scrolled. */
+.scroll-cue-rail {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 2.5rem;
+  /* mirrors <main> so the chevron lands on the same left edge as the text column */
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.scroll-cue {
+  display: block;
+  color: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.scroll-cue[hidden] { display: none; }
+
+.scroll-cue.is-shown { opacity: 1; }
+
+/* Small enough to read as a hint rather than a control. The glow is what carries it at
+   this size — a bare 14px chevron would barely register against the background. */
+.scroll-cue svg {
+  width: 14px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 5px var(--color-accent-glow));
+}
+
+.scroll-cue.is-shown svg { animation: scroll-cue-bob 2s ease-in-out infinite; }
+
+@keyframes scroll-cue-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* Scroll reveal (home page)
+   Marked elements start hidden and fade upward into place as they enter the viewport.
+   `reveal-enabled` is set pre-paint by head.html only when JS is running and motion is not
+   reduced, so the content is never hidden without a script present to bring it back.
+   reveal.js adds .is-visible and sets a per-batch transition-delay. */
+.reveal-enabled .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* Home */
 .hero { padding: 1.5rem 0 1.5rem; }
 .hero h1 { font-size: clamp(1.6rem, 7vw, 2.25rem); }
@@ -531,7 +596,7 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .typing-cursor {
@@ -554,6 +619,9 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .typing-cursor.blink { animation: none; }
+  /* head.html already skips adding .reveal-enabled here; this is belt-and-braces */
+  .reveal-enabled .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-cue.is-shown svg { animation: none; }
   .site-nav-brand,
   .blog-intro-quote,
   .tag-dropdown-chevron,
