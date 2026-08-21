@@ -5,6 +5,7 @@ img, picture { max-width: 100%; display: block; }
 
 /* Theme variables */
 :root {
+  color-scheme: light;
   --color-bg: #faf6f0;
   --color-bg-subtle: #f2ebe0;
   --color-text: #1a1d23;
@@ -12,10 +13,55 @@ img, picture { max-width: 100%; display: block; }
   --color-border: #e5dccd;
   --color-accent: #b5502e;
   --color-accent-muted: #f7e6de;
+  --shadow-soft: 0 6px 20px rgba(26, 20, 12, 0.08);
+  --shadow-raised: 0 10px 28px rgba(26, 20, 12, 0.14);
+  --syntax-keyword: #c2185b;
+  --syntax-string: #2e7d32;
+  --syntax-builtin: #6f42c1;
+  --syntax-number: #1565c0;
   --font-sans: "Alice", Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   --font-serif: "Alice", Georgia, "Times New Roman", serif;
   --font-heading: "Young Serif", Georgia, "Times New Roman", serif;
+}
+
+/* Dark palette. Written twice on purpose: the [data-theme] block serves the explicit
+   choice made by theme-toggle.js, the media query keeps dark mode working without JS.
+   Keep the two token lists in sync. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #16130f;
+  --color-bg-subtle: #201c17;
+  --color-text: #ece4d8;
+  --color-text-muted: #a1968a;
+  --color-border: #352f27;
+  --color-accent: #e08a63;
+  --color-accent-muted: #3a251c;
+  --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-raised: 0 10px 28px rgba(0, 0, 0, 0.55);
+  --syntax-keyword: #f48fb1;
+  --syntax-string: #a5d6a7;
+  --syntax-builtin: #c4a7f0;
+  --syntax-number: #8ab4f8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #16130f;
+    --color-bg-subtle: #201c17;
+    --color-text: #ece4d8;
+    --color-text-muted: #a1968a;
+    --color-border: #352f27;
+    --color-accent: #e08a63;
+    --color-accent-muted: #3a251c;
+    --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.45);
+    --shadow-raised: 0 10px 28px rgba(0, 0, 0, 0.55);
+    --syntax-keyword: #f48fb1;
+    --syntax-string: #a5d6a7;
+    --syntax-builtin: #c4a7f0;
+    --syntax-number: #8ab4f8;
+  }
 }
 
 /* Base */
@@ -31,6 +77,9 @@ a { color: var(--color-accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+
+/* The UA default is a light bar, which reads as a bright seam on a dark background */
+hr { border: none; border-top: 1px solid var(--color-border); margin: 2rem 0; }
 
 /* Layout */
 .site-nav, main, .site-footer {
@@ -51,7 +100,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
   border: 1px solid var(--color-border);
   border-radius: 999px;
   background: var(--color-bg-subtle);
-  box-shadow: 0 6px 20px rgba(26, 20, 12, 0.08);
+  box-shadow: var(--shadow-soft);
   position: sticky;
   top: 1rem;
   z-index: 10;
@@ -73,6 +122,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
   text-decoration: none;
   transform: translateY(4px) scale(1.05);
 }
+
+.site-nav-links { display: flex; align-items: center; }
 
 .site-nav-links a {
   font-family: var(--font-heading);
@@ -206,7 +257,7 @@ main { min-height: 60vh; padding-bottom: 4rem; }
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  box-shadow: 0 10px 28px rgba(26, 20, 12, 0.14);
+  box-shadow: var(--shadow-raised);
   max-height: 280px;
   overflow-y: auto;
   z-index: 30;
@@ -348,7 +399,7 @@ main { min-height: 60vh; padding-bottom: 4rem; }
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  box-shadow: 0 10px 28px rgba(26, 20, 12, 0.12);
+  box-shadow: var(--shadow-raised);
   padding: 0.85rem 1rem;
   font-family: var(--font-sans);
   font-size: 0.85rem;
@@ -416,11 +467,11 @@ main { min-height: 60vh; padding-bottom: 4rem; }
 
 /* Rouge syntax highlighting */
 .highlight .c, .highlight .c1, .highlight .cm { color: var(--color-text-muted); font-style: italic; }
-.highlight .k, .highlight .kd, .highlight .kn, .highlight .kr { color: #c2185b; }
-.highlight .s, .highlight .s1, .highlight .s2 { color: #2e7d32; }
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kr { color: var(--syntax-keyword); }
+.highlight .s, .highlight .s1, .highlight .s2 { color: var(--syntax-string); }
 .highlight .n, .highlight .nf, .highlight .nx { color: var(--color-text); }
-.highlight .nb, .highlight .bp { color: #6f42c1; }
-.highlight .mi, .highlight .mf { color: #1565c0; }
+.highlight .nb, .highlight .bp { color: var(--syntax-builtin); }
+.highlight .mi, .highlight .mf { color: var(--syntax-number); }
 .highlight .o { color: var(--color-text-muted); }
 
 /* Math */
@@ -435,6 +486,11 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   .post-header h1 { font-size: 1.6rem; }
   .blog-filters { flex-direction: column; }
   .project-card { padding: 1.25rem; }
+
+  /* The theme toggle costs the pill ~50px, which overflows at 320px on the stock
+     1.5rem gutters. Tightening them keeps everything on one line down to 320. */
+  .site-nav-links a { margin-left: 1rem; }
+  .theme-toggle { margin-left: 0.85rem; }
 
   /* A button is shrink-to-fit by default, which left the menu anchored to a wider box */
   .tag-dropdown-trigger { width: 100%; }
@@ -675,4 +731,44 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
 .footnotes li p {
   margin: 0;
+}
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  margin-left: 1.5rem;
+  padding: 0;
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  outline: none;
+  color: var(--color-accent);
+  border-color: var(--color-border);
+}
+
+.theme-toggle svg { width: 16px; height: 16px; }
+
+/* One icon shows at a time: sun in dark mode (click to go light), moon in light mode */
+.theme-toggle .theme-toggle-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .theme-toggle-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .theme-toggle-moon { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .theme-toggle-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .theme-toggle-moon { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle { transition: none; }
 }
