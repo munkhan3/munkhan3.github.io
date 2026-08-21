@@ -56,7 +56,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Alice&family=Rakkas&display=swap" rel="stylesheet">
-<title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+{% comment %}
+  Top-level pages carry their full tab title in front matter. Blog posts keep the site
+  name as a suffix, since the post title alone says nothing about whose site it is.
+{% endcomment %}
+<title>{% if page.layout == "blog-post" %}{{ page.title }} · {{ site.title }}{% else %}{{ page.title | default: site.title }}{% endif %}</title>
 <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 {% if page.layout == "blog-post" %}
 <script>
