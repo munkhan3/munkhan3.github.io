@@ -1,5 +1,5 @@
 ---
-title: "What Are Your Chances of Winning Ride the Bus?"
+title: "What Are The Chances: Winning Ride the Bus"
 date: 2026-07-05
 tags: [probability, foundations]
 description: "Why the sample mean of i.i.d. random variables converges to a normal distribution as n grows, regardless of the underlying distribution."

@@ -492,6 +492,13 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   .site-nav-links a { margin-left: 1rem; }
   .theme-toggle { margin-left: 0.85rem; }
 
+  /* Side by side leaves the greeting too cramped; stack with the portrait above it */
+  .hero-portrait { width: 88px; height: 88px; }
+
+  /* Side-by-side title/company does not fit a phone; let them flow inline instead */
+  .timeline-title { display: block; }
+  .timeline-at { flex: none; }
+
   /* A button is shrink-to-fit by default, which left the menu anchored to a wider box */
   .tag-dropdown-trigger { width: 100%; }
   .tag-dropdown-menu { left: 0; right: 0; min-width: 0; }
@@ -516,16 +523,24 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 }
 
 /* Home */
-.hero { padding: 2rem 0 1.5rem; }
+.hero { padding: 1.5rem 0 1.5rem; }
 .hero h1 { font-size: clamp(1.6rem, 7vw, 2.25rem); }
+
+/* Stacked above the greeting; the reset already makes img display:block, so no flex needed */
+.hero-portrait {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
 
 .typing-cursor {
   display: inline-block;
-  width: 2px;
-  height: 0.85em;
+  width: 15px;
+  height: 0.9em;
   margin-left: 2px;
   background: var(--color-accent);
-  vertical-align: -0.1em;
+  vertical-align: -0.05em;
 }
 
 .typing-cursor.blink {
@@ -585,13 +600,13 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
 .timeline-tab-panel { display: none; }
 
-#timeline-tab-education:checked ~ .timeline-tab-panel[data-panel="education"],
-#timeline-tab-professional:checked ~ .timeline-tab-panel[data-panel="professional"] {
+#timeline-tab-professional:checked ~ .timeline-tab-panel[data-panel="professional"],
+#timeline-tab-research:checked ~ .timeline-tab-panel[data-panel="research"] {
   display: block;
 }
 
-#timeline-tab-education:checked ~ .timeline-tab-nav label[for="timeline-tab-education"],
-#timeline-tab-professional:checked ~ .timeline-tab-nav label[for="timeline-tab-professional"] {
+#timeline-tab-professional:checked ~ .timeline-tab-nav label[for="timeline-tab-professional"],
+#timeline-tab-research:checked ~ .timeline-tab-nav label[for="timeline-tab-research"] {
   color: var(--color-text);
   border-bottom-color: var(--color-accent);
 }
@@ -619,6 +634,17 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   background: var(--color-border);
 }
 
+/* A promotion is one continuous tenure shown as two entries. A dotted connector marks
+   the pair as the same thread — same colour and weight as a normal connector, so the
+   only signal is the break in the line. */
+.timeline-item-linked:not(:last-child)::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-border) 0 3px,
+    transparent 3px 7px
+  );
+}
+
 .timeline-marker {
   position: absolute;
   left: 0;
@@ -627,6 +653,22 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   height: 12px;
   border-radius: 50%;
   background: var(--color-accent);
+}
+
+/* An entry with a crest leads with it instead of the dot. The dot is a chronology
+   device, so the connector line goes with it — a rule threading between two crests
+   reads as a mistake. Height-constrained rather than boxed so the mark sits flush left. */
+.timeline-item-logo { padding-left: 3rem; }
+.timeline-item-logo::before { display: none; }
+
+.timeline-logo {
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  height: 40px;
+  width: auto;
+  max-width: 44px;
+  object-fit: contain;
 }
 
 .timeline-summary {
@@ -642,7 +684,8 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   content: '+';
   position: absolute;
   right: 0.25rem;
-  top: 0.1rem;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text-muted);
   font-family: var(--font-sans);
   font-size: 1.1rem;
@@ -661,14 +704,57 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   margin-bottom: 0.3rem;
 }
 
-.timeline-title { font-size: 1.15rem; line-height: 1.3; margin-bottom: 0.15rem; }
+.timeline-title {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin-bottom: 0.15rem;
+  /* Position on the left, "@ Company" pushed to the right edge. The summary already
+     reserves 1.75rem on the right for the +/- toggle, so the two never collide. */
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
 
 .timeline-org {
   font-size: 0.9rem;
   color: var(--color-text-muted);
 }
 
+/* "@ Company" is muted so the position reads first. The column is a fixed width with the
+   text left-aligned inside it, which lines the "@" up across every entry — flush-right
+   text would start at a different x for each company name. 13.5rem clears the longest
+   name on one line; anything longer wraps within the column, still aligned. */
+.timeline-at {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  flex: 0 0 13.5rem;
+  text-align: left;
+}
+
+.timeline-sep { opacity: 0.5; padding: 0 0.15rem; }
+
+.timeline-prose {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0.9rem 0 0;
+}
+
+.timeline-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.85rem 0 0;
+}
+
+/* .tag carries its own right margin for inline runs; the flex gap handles spacing here */
+.timeline-skills .tag { margin-right: 0; }
+
 .timeline-bullets { padding-left: 1.2rem; margin: 0.9rem 0 0; }
+
+/* Education carries a single coursework line, where a marker is just noise.
+   Dropping the padding too lets it align under the title rather than float indented. */
+.timeline-bullets-plain { list-style: none; padding-left: 0; }
 .timeline-bullets li {
   font-size: 0.92rem;
   color: var(--color-text);

@@ -1,0 +1,48 @@
+{% assign items = site.data.timeline | where: "category", include.category %}
+<ol class="timeline">
+  {% for item in items %}
+  {% comment %}
+    Consecutive entries sharing a `group` are one continuous tenure (e.g. a promotion).
+    The connector is drawn by the upper item, so it carries the linked class.
+  {% endcomment %}
+  {% assign next_i = forloop.index0 | plus: 1 %}
+  {% assign next_item = items[next_i] %}
+  {% assign linked = false %}
+  {% if item.group and next_item.group == item.group %}{% assign linked = true %}{% endif %}
+  <li class="timeline-item{% if item.logo %} timeline-item-logo{% endif %}{% if linked %} timeline-item-linked{% endif %}">
+    {% comment %} alt is empty on purpose: the institution is named in the text right beside it {% endcomment %}
+    {% if item.logo %}<img class="timeline-logo" src="{{ item.logo | relative_url }}" alt="">
+    {% else %}<span class="timeline-marker"></span>{% endif %}
+    <details class="timeline-content"{% if include.expanded %} open{% endif %}>
+      <summary class="timeline-summary">
+        {% unless include.hide_dates %}<div class="timeline-date">{{ item.date }}</div>{% endunless %}
+        {% comment %}
+          `type` marks an experience entry: those read "Position @ Company" with an
+          employment-type/location subtitle. Education has no type and keeps org on its
+          own line, so adding a degree never picks up the "@" treatment by accident.
+        {% endcomment %}
+        {% if item.type %}
+        <h3 class="timeline-title">{{ item.title }} <span class="timeline-at">@ {{ item.org }}</span></h3>
+        <div class="timeline-org">{{ item.type }} <span class="timeline-sep">|</span> {{ item.location }}</div>
+        {% else %}
+        <h3 class="timeline-title">{{ item.title }}</h3>
+        <div class="timeline-org">{{ item.org }}{% unless include.hide_location %} · {{ item.location }}{% endunless %}</div>
+        {% endif %}
+      </summary>
+      {% if item.summary %}
+      <p class="timeline-prose">{{ item.summary }}</p>
+      {% endif %}
+      {% if item.skills %}
+      <p class="timeline-skills">
+        {% for s in item.skills %}<span class="tag">{{ s }}</span>{% endfor %}
+      </p>
+      {% endif %}
+      {% if item.bullets %}
+      <ul class="timeline-bullets{% if include.plain_bullets %} timeline-bullets-plain{% endif %}">
+        {% for b in item.bullets %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    </details>
+  </li>
+  {% endfor %}
+</ol>
