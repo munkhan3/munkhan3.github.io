@@ -500,7 +500,6 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
   /* Side-by-side title/company does not fit a phone; let them flow inline instead */
   .timeline-title { display: block; }
-  .timeline-at { flex: none; }
 
   /* A button is shrink-to-fit by default, which left the menu anchored to a wider box */
   .tag-dropdown-trigger { width: 100%; }
@@ -522,7 +521,6 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 
 @media (max-width: 480px) {
   .post-item { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
-  .project-card-header { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
 }
 
 /* Scroll hint
@@ -543,14 +541,64 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   z-index: 5;
 }
 
+/* The line is drawn down from under the headline, then erased from the top as the chevron
+   fades in — so the eye is led to the chevron instead of having to find it. Its height is
+   measured by reveal.js and set as --cue-line-height, since the distance from the headline
+   to the fixed rail depends on the viewport. Centred on the 14px chevron: the rail's 1.5rem
+   padding, plus half the chevron, minus half the line's own width. */
+.scroll-cue-line {
+  /* The knobs. Thickness feeds the centring below, so changing it here is enough —
+     1.5rem is the rail's padding and 7px is half the 14px chevron. Lower the opacity to
+     make the line fainter; 1 is fully opaque. */
+  --cue-line-width: 1px;
+  --cue-line-color: var(--color-accent);
+  --cue-line-opacity: 0.5;
+
+  position: absolute;
+  left: calc(1.5rem + 7px - var(--cue-line-width) / 2);
+  bottom: calc(100% + 6px);
+  width: var(--cue-line-width);
+  height: var(--cue-line-height, 0px);
+  opacity: var(--cue-line-opacity);
+  /* Muted grey rather than the accent: the line is the gesture, the chevron is the target,
+     and two glowing accent elements competing made it unclear which to look at. */
+  background: var(--cue-line-color);
+  /* Hidden until the sweep starts. clip-path does both halves of the gesture with one
+     property, so draw and erase are a single animation rather than two chained on an
+     event — which is what guarantees there is no pause where they meet. */
+  clip-path: inset(0 0 100% 0);
+}
+
+.scroll-cue-line.is-sweeping {
+  animation: scroll-cue-sweep 5s infinite;
+}
+
+/* One 5s cycle: 1.4s drawing down, 1.1s being eaten from the top, then 2.5s empty before
+   it comes round again. Per-keyframe timing functions apply to the segment that starts at
+   that keyframe, so the draw decelerates into full length and the erase accelerates out of
+   it. The 50% and 100% states are both "nothing visible", so the loop point is invisible. */
+@keyframes scroll-cue-sweep {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  28% {
+    clip-path: inset(0 0 0 0);
+    animation-timing-function: ease-in;
+  }
+  50%, 100% {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
 .scroll-cue {
   display: block;
   color: var(--color-accent);
   opacity: 0;
-  transition: opacity 0.6s ease;
+  /* Short, because the stroke draw below is the real entrance — this only stops the glow
+     popping in hard, and gives the fade-out something to ride on when it is dismissed. */
+  transition: opacity 0.25s ease;
 }
-
-.scroll-cue[hidden] { display: none; }
 
 .scroll-cue.is-shown { opacity: 1; }
 
@@ -563,11 +611,34 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   filter: drop-shadow(0 0 5px var(--color-accent-glow));
 }
 
-.scroll-cue.is-shown svg { animation: scroll-cue-bob 2s ease-in-out infinite; }
+/* Written left to right. The path starts at its top-left point, so retracting the dash
+   offset draws it in that direction. pathLength="100" in the markup makes 100 the whole
+   stroke regardless of the real geometry. */
+.scroll-cue svg path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
 
-@keyframes scroll-cue-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
+.scroll-cue.is-shown svg path {
+  animation: scroll-cue-write 0.6s ease-out forwards;
+}
+
+@keyframes scroll-cue-write {
+  to { stroke-dashoffset: 0; }
+}
+
+/* The dip runs on the line's own 5s clock, started 1.4s in via the negative delay — which
+   is the 28% mark where the line hits full length and starts being eaten. So the chevron
+   is pushed down exactly as the line rushes into it, then eases back during the idle. */
+.scroll-cue.is-shown svg {
+  animation: scroll-cue-nudge 5s infinite;
+  animation-delay: -1.4s;
+}
+
+@keyframes scroll-cue-nudge {
+  0%, 28%   { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+  66%, 100% { transform: translateY(0); }
 }
 
 /* Scroll reveal (home page)
@@ -631,7 +702,8 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 }
 
 /* About */
-.about { margin-bottom: 3.5rem; }
+/* 3rem matches .timeline-section's padding-bottom, so every section break is the same */
+.about { margin-bottom: 3rem; }
 .about p {
   font-family: var(--font-serif);
   font-size: 1.05rem;
@@ -691,6 +763,10 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   padding-left: 1.75rem;
   padding-bottom: 2.25rem;
 }
+
+/* That padding separates entries from each other. On the last one there is nothing to
+   separate from, and it just stacks on the section's own padding. */
+.timeline-item:last-child { padding-bottom: 0; }
 
 .timeline-item:not(:last-child)::before {
   content: '';
@@ -789,15 +865,12 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   color: var(--color-text-muted);
 }
 
-/* "@ Company" is muted so the position reads first. The column is a fixed width with the
-   text left-aligned inside it, which lines the "@" up across every entry — flush-right
-   text would start at a different x for each company name. 13.5rem clears the longest
-   name on one line; anything longer wraps within the column, still aligned. */
+/* "@ Company" is muted so the position reads first, and sits flush against the right edge
+   of the entry. Wrapping stays right-aligned rather than going ragged. */
 .timeline-at {
   color: var(--color-text-muted);
   font-weight: 400;
-  flex: 0 0 13.5rem;
-  text-align: left;
+  text-align: right;
 }
 
 .timeline-sep { opacity: 0.5; padding: 0 0.15rem; }
@@ -848,20 +921,10 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
 }
 
 .project-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
   margin-bottom: 0.2rem;
 }
 
 .project-card-header h2 { font-size: 1.25rem; }
-
-.project-date {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
 
 .project-meta {
   font-family: var(--font-mono);

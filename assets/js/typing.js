@@ -6,8 +6,9 @@
     // reworded without silently breaking the cue.
     { text: "Hi! I'm Muneer", pause: 5000, append: true, cue: true },
     { text: "Data Scientist", pause: 1400, append: false },
-    { text: "Researcher", pause: 1400, append: false },
-    { text: "Videographer", pause: 1400, append: false }
+    { text: "Graduate Researcher", pause: 1400, append: false },
+    { text: "Freeride Skier", pause: 1400, append: false },
+    { text: "Amateur Videographer", pause: 1400, append: false }
   ];
   var el = document.getElementById("typing-text");
   var cursor = document.getElementById("typing-cursor");

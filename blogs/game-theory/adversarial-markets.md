@@ -11,7 +11,7 @@ We have {% include post-preview-link.html path="blogs/probability/prediction-mar
 
 If you’re a bit more thorough though, you should stop to think about _who is on the other side of your trade_. You might imagine that someone who's jumping at the chance to take your bet could know something that you don't. Consider the following toy example:
 
-> Suppose I pull a coin out of my pocket and propose a game. I tell you that I'll give you <span>$</span>1,000 if it lands H, but you'll have to give me <span>$</span>100 if it lands T. You are free to play as many times as you would like. Would you play?
+> Suppose I pull a coin out of my pocket and propose a game. I tell you that I'll give you $1,000 if it lands H, but you'll have to give me $100 if it lands T. You are free to play as many times as you would like. Would you play?
 >
 > At first, it seems like an incredible deal -- I'm giving you 10-to-1 odds on a coin flip _and_ allowing you to play repeatedly. If I had a track record for being a degenerate gambler looking for an adrenaline rush, you might not think twice. But knowing me to be a rational person, you might start to get suspicious: Why would he make an offer like that? Does he have an ulterior motive? **_Is there something I'm missing?_**
 >

@@ -14,17 +14,24 @@ title: "Muneer's Portfolio"
   chevron sits on the same left edge as everything else on the page.
 {% endcomment %}
 <div class="scroll-cue-rail" aria-hidden="true">
-  <span class="scroll-cue" hidden>
+  <span class="scroll-cue-line"></span>
+  {% comment %}
+    Deliberately not `hidden`: it sits in the layout from the first frame at opacity 0.
+    The rail is bottom-anchored, so letting the chevron appear later would grow the rail
+    upward and jerk the line's anchor with it. pathLength normalises the path to 100 units
+    so the stroke-dash draw below does not depend on the actual geometry.
+  {% endcomment %}
+  <span class="scroll-cue">
     <svg viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="2.4"
          stroke-linecap="round" stroke-linejoin="round">
-      <path d="M1 1l11 11L23 1" />
+      <path d="M1 1l11 11L23 1" pathLength="100" />
     </svg>
   </span>
 </div>
 
 <section class="about">
-  <p class="reveal">I enjoy taking on seemingly impossible problems with creative approaches and using the output to drive strategy. I use quantitative analysis of data to help teams make informed decisions. My background spans data science / machine learning, financial modeling, and strategy.</p>
-  <p class="reveal">Currently, I'm working on my Statistics M.S. at the University of Chicago. I just finished up a summer internship at SpaceX as a Data Scientist on the Starlink team, where I stood up a survival model. Previously, I worked at Deloitte as a Strategy Consultant.</p>
+  <p class="reveal">As you can see, I wear many hats. In general though, <strong>I enjoy working with people to solve complex and impactful problems.</strong> My background spans data science, machine learning, financial modeling, and strategy. At the moment, I'm working on my Statistics Masters at the University of Chicago.</p>
+  <p class="reveal">I also like to write about things I find interesting. {% include post-preview-link.html latest=true text="Here's the latest." %} Maybe you'll find them interesting too.</p>
 </section>
 
 <section class="timeline-section reveal">

@@ -47,7 +47,7 @@ title: "Muneer's Blog"
           {% if post.description %}
           <a href="{{ post.url | relative_url }}" class="post-item-link">
             {{ post.title }}
-            <span class="post-preview-card">
+            <span class="post-preview-card tex2jax_ignore">
               {% comment %} markdownify wraps output in <p>, which is not valid inside this <span> {% endcomment %}
               {% if post.tags %}<span class="post-preview-tags">{{ post.tags | join: ', ' | replace: '-', ' ' }}</span>{% endif %}
               <span class="post-preview-excerpt">{{ post.description | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>

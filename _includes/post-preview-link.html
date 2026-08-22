@@ -1,7 +1,21 @@
 {%- comment -%}
+  Links to a post with a hover preview card. Either name one:
+      {% include post-preview-link.html path="blogs/…/foo.md" text="…" %}
+  or ask for whatever is newest, which never needs updating when a post is added:
+      {% include post-preview-link.html latest=true text="…" %}
+
   Descriptions are rendered as markdown so previews match wherever they appear.
   markdownify wraps its output in <p>, which cannot live inside the card's <span>,
   so it is stripped back off. Whitespace control matters here: this include is used
   mid-sentence in prose, and a stray newline would show up as a space before the link.
 {%- endcomment -%}
-{% assign target = site.pages | where: "path", include.path | first %}{% if target %}<a href="{{ target.url | relative_url }}" class="post-preview-link">{{ include.text | default: target.title }}<span class="post-preview-card"><span class="post-preview-title">{{ target.title }}</span>{% if target.date %}<span class="post-preview-date">{{ target.date | date: "%b %-d, %Y" }}</span>{% endif %}{% if target.description %}<span class="post-preview-excerpt">{{ target.description | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>{% endif %}</span></a>{% else %}{{ include.text }}{% endif %}
+{%- if include.latest -%}
+  {%- comment -%}
+    Filter on having a date rather than on layout: every post carries one and the blog
+    index does not, so the index can never be picked as "the latest post".
+  {%- endcomment -%}
+  {%- assign candidates = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.date" | where_exp: "p", "p.title" | sort: "date" -%}
+  {%- assign target = candidates | last -%}
+{%- else -%}
+  {%- assign target = site.pages | where: "path", include.path | first -%}
+{%- endif -%}{% if target %}<a href="{{ target.url | relative_url }}" class="post-preview-link">{{ include.text | default: target.title }}<span class="post-preview-card tex2jax_ignore"><span class="post-preview-title">{{ target.title }}</span>{% if target.date %}<span class="post-preview-date">{{ target.date | date: "%b %-d, %Y" }}</span>{% endif %}{% if target.description %}<span class="post-preview-excerpt">{{ target.description | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>{% endif %}</span></a>{% else %}{{ include.text }}{% endif %}

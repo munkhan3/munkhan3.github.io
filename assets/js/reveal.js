@@ -81,13 +81,37 @@
 
   // ---- scroll hint (first visit only) --------------------------------------------------
   var cue = document.querySelector(".scroll-cue");
+  var cueLine = document.querySelector(".scroll-cue-line");
+  var cueTimer = null;
+  var chevronShown = false;
+
+  var DRAW_PORTION_MS = 1400;  // the 28% mark of scroll-cue-sweep's 5s cycle
+  var MIN_LINE = 60;           // below this the line is too stubby to read as a gesture
+
+  // Distance from just under the headline down to just above the chevron. The rail is
+  // fixed and the headline is in flow, but the cue only ever runs at scrollY 0, so
+  // viewport coordinates line up.
+  function measureLine() {
+    var h1 = document.querySelector(".hero h1");
+    var rail = document.querySelector(".scroll-cue-rail");
+    if (!h1 || !rail) return 0;
+    return Math.round(rail.getBoundingClientRect().top - h1.getBoundingClientRect().bottom - 22);
+  }
 
   function hideCue() {
-    if (!cue) return;
-    cue.classList.remove("is-shown");
+    clearTimeout(cueTimer);
     document.removeEventListener("typing:phase-done", onPhaseDone);
-    // Wait out the fade before pulling it from the layout entirely.
-    setTimeout(function () { if (cue) cue.hidden = true; }, 700);
+    if (cueLine) cueLine.classList.remove("is-sweeping");
+    if (!cue) return;
+    // Fades out and stops animating. It stays in the layout on purpose — pulling it out
+    // would resize the bottom-anchored rail and shift the line.
+    cue.classList.remove("is-shown");
+  }
+
+  function revealChevron() {
+    if (chevronShown) return;
+    chevronShown = true;
+    cue.classList.add("is-shown");
   }
 
   function onPhaseDone(event) {
@@ -96,11 +120,20 @@
     // The typing loop cycles forever; by the time it comes round again the visitor has
     // either scrolled or deliberately not, and either way the nudge has had its turn.
     if (window.scrollY > 0 || !cue) return;
-    cue.hidden = false;
-    // Let the browser register the un-hidden element before transitioning it in.
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () { cue.classList.add("is-shown"); });
-    });
+
+    var h = cueLine ? measureLine() : 0;
+    if (h < MIN_LINE) {
+      // Short viewport: no room to draw anything meaningful, so just fade the chevron in.
+      revealChevron();
+      return;
+    }
+    cueLine.style.setProperty("--cue-line-height", h + "px");
+    // The sweep loops on its own until they scroll — one pass is easy to miss if they
+    // happened to look away.
+    cueLine.classList.add("is-sweeping");
+    // The chevron arrives as the line starts being eaten, so the two read as one gesture.
+    // Matches the 28% keyframe of the 5s cycle; being a frame off only shifts the fade.
+    cueTimer = setTimeout(revealChevron, DRAW_PORTION_MS);
   }
 
   if (firstVisit && cue) document.addEventListener("typing:phase-done", onPhaseDone);

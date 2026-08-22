@@ -66,9 +66,16 @@
 <script>
   window.MathJax = {
     tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      // No single-$ delimiter on purpose. Kramdown already turns $$..$$ into \(..\)
+      // and \[..\] before MathJax runs, so math still works — and it leaves a lone $
+      // alone, which means currency in prose needs no escaping.
+      inlineMath: [['\\(', '\\)']],
       displayMath: [['$$', '$$'], ['\\[', '\\]']]
     },
+    // Not on by default. Lets prose blocks opt out of math parsing — preview cards carry
+    // post descriptions, where a pair of plain dollar amounts would otherwise be eaten
+    // and typeset as an equation.
+    options: { ignoreHtmlClass: 'tex2jax_ignore' },
     svg: { fontCache: 'global' }
   };
 </script>
