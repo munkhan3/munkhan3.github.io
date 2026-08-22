@@ -1,6 +1,5 @@
-# Experience entries carry `type` (Internship / Full-Time / Part-Time), a one-paragraph
-# `summary`, and `skills`. Education entries have no `type` and keep `bullets` — the
-# timeline-list include switches format on the presence of `type`.
+# timeline-list.html switches format on `type`: experience entries carry it plus `summary`
+# and `skills`; education entries have no `type` and use `bullets` instead.
 
 - date: "Sep. 2026 – Present"
   category: "research"

@@ -67,7 +67,7 @@ The probability that we determine by leveraging the collective expectation of th
 
 [^2]: Frankly, I think these odds are way too inflated. As a Duke fan, I have experienced too much heartbreak to get my hopes up again. Obviously, this is not financial advice.
 
-[^3]: This makes a few assumptions. Essentially, it's the profit we'd expect if we bought this contract once in a bunch of different universes. In some of the universes, Duke wins. In other universes, Duke loses. The probability $p\%$ we set here represents the _percentage of those universes_ where Duke wins. Some resources: [Law of Large Numbers](https://www.reddit.com/r/explainlikeimfive/comments/177rxp4/eli5_whats_the_law_of_large_numbers/) and [IID](https://towardsdatascience.com/independent-and-identically-distributed-ce250ad1bfa8/).
+[^3]: This makes a few assumptions. Essentially, it's the profit we'd expect if we bought this contract once in a bunch of different universes. In some of the universes, Duke wins. In other universes, Duke loses. The probability $$p\%$$ we set here represents the _percentage of those universes_ where Duke wins. Some resources: [Law of Large Numbers](https://www.reddit.com/r/explainlikeimfive/comments/177rxp4/eli5_whats_the_law_of_large_numbers/) and [IID](https://towardsdatascience.com/independent-and-identically-distributed-ce250ad1bfa8/).
 
 [^4]: This does not mean it _will_ be $250, because it must be either $100 or $300. A simple way to interpret this is that 75% of traders think it will definitely be $300 tomorrow, while the other 25% think it will definitely be $100 tomorrow. Technically this is not true -- traders carry a mix of uncertainties, but _on average_ it works out.
 

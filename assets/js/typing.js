@@ -1,9 +1,8 @@
 (function () {
   var phases = [
     { text: "Hi!", pause: 1000, append: false },
-    // `cue` marks the phase after which the scroll hint may appear (see reveal.js).
-    // Flagging it on the phase rather than by index means these can be reordered or
-    // reworded without silently breaking the cue.
+    // `cue` marks the phase after which reveal.js may show the scroll hint. Flagged on the
+    // phase rather than by index so these can be reordered without breaking the cue.
     { text: "Hi! I'm Muneer", pause: 5000, append: true, cue: true },
     { text: "Data Scientist", pause: 1400, append: false },
     { text: "Graduate Researcher", pause: 1400, append: false },

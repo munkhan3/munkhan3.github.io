@@ -1,10 +1,7 @@
 {% assign items = site.data.timeline | where: "category", include.category %}
 <ol class="timeline">
   {% for item in items %}
-  {% comment %}
-    Consecutive entries sharing a `group` are one continuous tenure (e.g. a promotion).
-    The connector is drawn by the upper item, so it carries the linked class.
-  {% endcomment %}
+  {% comment %} Consecutive entries sharing a `group` are one tenure (e.g. a promotion). The upper item draws the connector, so it carries the class. {% endcomment %}
   {% assign next_i = forloop.index0 | plus: 1 %}
   {% assign next_item = items[next_i] %}
   {% assign linked = false %}
@@ -14,32 +11,29 @@
     {% if item.logo %}<img class="timeline-logo" src="{{ item.logo | relative_url }}" alt="">
     {% else %}<span class="timeline-marker"></span>{% endif %}
     <details class="timeline-content"{% if include.expanded %} open{% endif %}>
+      {% comment %} Only phrasing content is valid inside <summary> (plus headings), so these are spans, not divs. Data is plain text, hence `escape` — "Mergers & Acquisitions" must not emit a raw &. {% endcomment %}
       <summary class="timeline-summary">
-        {% unless include.hide_dates %}<div class="timeline-date">{{ item.date }}</div>{% endunless %}
-        {% comment %}
-          `type` marks an experience entry: those read "Position @ Company" with an
-          employment-type/location subtitle. Education has no type and keeps org on its
-          own line, so adding a degree never picks up the "@" treatment by accident.
-        {% endcomment %}
+        {% unless include.hide_dates %}<span class="timeline-date">{{ item.date | escape }}</span>{% endunless %}
+        {% comment %} `type` marks an experience entry: "Position @ Company" over a type/location subtitle. Education has none and keeps org on its own line. {% endcomment %}
         {% if item.type %}
-        <h3 class="timeline-title">{{ item.title }} <span class="timeline-at">@ {{ item.org }}</span></h3>
-        <div class="timeline-org">{{ item.type }} <span class="timeline-sep">|</span> {{ item.location }}</div>
+        <h3 class="timeline-title">{{ item.title | escape }} <span class="timeline-at">@ {{ item.org | escape }}</span></h3>
+        <span class="timeline-org">{{ item.type | escape }} <span class="timeline-sep">|</span> {{ item.location | escape }}</span>
         {% else %}
-        <h3 class="timeline-title">{{ item.title }}</h3>
-        <div class="timeline-org">{{ item.org }}{% unless include.hide_location %} · {{ item.location }}{% endunless %}</div>
+        <h3 class="timeline-title">{{ item.title | escape }}</h3>
+        <span class="timeline-org">{{ item.org | escape }}{% unless include.hide_location %} · {{ item.location | escape }}{% endunless %}</span>
         {% endif %}
       </summary>
       {% if item.summary %}
-      <p class="timeline-prose">{{ item.summary }}</p>
+      <p class="timeline-prose">{{ item.summary | escape }}</p>
       {% endif %}
       {% if item.skills %}
       <p class="timeline-skills">
-        {% for s in item.skills %}<span class="tag">{{ s }}</span>{% endfor %}
+        {% for s in item.skills %}<span class="tag">{{ s | escape }}</span>{% endfor %}
       </p>
       {% endif %}
       {% if item.bullets %}
       <ul class="timeline-bullets{% if include.plain_bullets %} timeline-bullets-plain{% endif %}">
-        {% for b in item.bullets %}<li>{{ b }}</li>{% endfor %}
+        {% for b in item.bullets %}<li>{{ b | escape }}</li>{% endfor %}
       </ul>
       {% endif %}
     </details>

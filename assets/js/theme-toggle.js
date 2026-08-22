@@ -17,7 +17,7 @@
     root.setAttribute("data-theme", next);
     try {
       localStorage.setItem("theme", next);
-    } catch (e) {
+    } catch {
       // Private browsing can block storage; the theme still applies for this page view.
     }
   });
@@ -26,7 +26,7 @@
   systemDark.addEventListener("change", function (event) {
     try {
       if (localStorage.getItem("theme")) return;
-    } catch (e) {
+    } catch {
       return;
     }
     root.setAttribute("data-theme", event.matches ? "dark" : "light");

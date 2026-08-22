@@ -1,19 +1,15 @@
 {%- comment -%}
   Links to a post with a hover preview card. Either name one:
       {% include post-preview-link.html path="blogs/…/foo.md" text="…" %}
-  or ask for whatever is newest, which never needs updating when a post is added:
+  or ask for whatever is newest:
       {% include post-preview-link.html latest=true text="…" %}
 
-  Descriptions are rendered as markdown so previews match wherever they appear.
-  markdownify wraps its output in <p>, which cannot live inside the card's <span>,
-  so it is stripped back off. Whitespace control matters here: this include is used
-  mid-sentence in prose, and a stray newline would show up as a space before the link.
+  Descriptions run through markdownify, which wraps output in <p> — stripped back off since
+  that cannot live inside the card's <span>. The whitespace control matters: this is used
+  mid-sentence, and a stray newline would show up as a space before the link.
 {%- endcomment -%}
 {%- if include.latest -%}
-  {%- comment -%}
-    Filter on having a date rather than on layout: every post carries one and the blog
-    index does not, so the index can never be picked as "the latest post".
-  {%- endcomment -%}
+  {%- comment -%} Filtering on date rather than layout keeps the blog index, which has none, out of the running {%- endcomment -%}
   {%- assign candidates = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.date" | where_exp: "p", "p.title" | sort: "date" -%}
   {%- assign target = candidates | last -%}
 {%- else -%}

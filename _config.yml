@@ -2,6 +2,10 @@ title: Muneer's Portfolio
 author: Muneer Khan
 description: Digital Portfolio & Blog
 
+# Every layout, include and stylesheet here is local. Left unset, github-pages falls back
+# to minima and builds ~2,900 lines of unused CSS into the site.
+theme: null
+
 markdown: kramdown
 kramdown:
   input: GFM

@@ -5,22 +5,14 @@ title: "Muneer's Portfolio"
 <section class="hero">
   <img class="hero-portrait" src="{{ '/assets/img/profile.png' | relative_url }}"
        alt="Muneer Khan" width="150" height="150">
-  <h1><span id="typing-text"></span><span id="typing-cursor" class="typing-cursor" aria-hidden="true"></span></h1>
+  {% comment %} typing.js fills the span; the noscript keeps the h1 from being empty without JS {% endcomment %}
+  <h1><noscript>Hi! I'm Muneer</noscript><span id="typing-text"></span><span id="typing-cursor" class="typing-cursor" aria-hidden="true"></span></h1>
 </section>
 
-{% comment %}
-  Scroll hint. Hidden until reveal.js shows it, and only ever shown if the visitor has not
-  scrolled by the time the headline lands. The rail matches <main>'s column geometry so the
-  chevron sits on the same left edge as everything else on the page.
-{% endcomment %}
+{% comment %} Scroll hint, shown by reveal.js only if the visitor has not scrolled by the time the headline lands. The rail matches <main>'s column so the chevron shares its left edge. {% endcomment %}
 <div class="scroll-cue-rail" aria-hidden="true">
   <span class="scroll-cue-line"></span>
-  {% comment %}
-    Deliberately not `hidden`: it sits in the layout from the first frame at opacity 0.
-    The rail is bottom-anchored, so letting the chevron appear later would grow the rail
-    upward and jerk the line's anchor with it. pathLength normalises the path to 100 units
-    so the stroke-dash draw below does not depend on the actual geometry.
-  {% endcomment %}
+  {% comment %} Not `hidden`: it sits in the layout at opacity 0 from the first frame, since the rail is bottom-anchored and a late arrival would jerk the line's anchor upward. {% endcomment %}
   <span class="scroll-cue">
     <svg viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="2.4"
          stroke-linecap="round" stroke-linejoin="round">

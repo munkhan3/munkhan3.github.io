@@ -12,39 +12,35 @@
       if (saved === "dark" || saved === "light") {
         document.documentElement.setAttribute("data-theme", saved);
       }
-    } catch (e) {}
+    } catch {}
   })();
 </script>
 {% if page.url == '/' %}
 <script>
-  // Home only. Runs before first paint so the content below the hero is hidden from the
-  // very first frame rather than flashing in and then disappearing. If this never runs
-  // (JS disabled), none of the reveal CSS applies and the page renders normally.
+  // Home only. Runs before first paint so content below the hero is hidden from the very
+  // first frame rather than flashing in and then disappearing. If this never runs (JS
+  // disabled), none of the reveal CSS applies and the page renders normally.
   (function () {
     var root = document.documentElement;
     if (window.matchMedia &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    // Content always starts hidden and fades up — set here rather than in reveal.js so it
-    // lands before first paint and never flashes visible.
     root.classList.add("reveal-enabled");
 
-    // Only the first arrival of a session gets the full entrance: hold everything back
-    // until the visitor scrolls, and offer the chevron once the headline lands. A reload
-    // or a trip back from Blog just fades the content up on its own. Marked on load rather
-    // than when the reveal finishes, so a refresh does not count as a fresh arrival.
+    // Only the first arrival of a session gets the full entrance; a reload or a trip back
+    // from Blog just fades up. Marked on load rather than when the reveal finishes, so a
+    // refresh does not count as a fresh arrival.
     var played = false;
     try {
       played = sessionStorage.getItem("introPlayed") === "1";
       if (!played) sessionStorage.setItem("introPlayed", "1");
-    } catch (e) {
+    } catch {
       // Private browsing can block storage; the entrance just plays each time.
     }
     if (!played) root.classList.add("first-visit");
 
-    // Watchdog. The hidden state is applied by CSS but only ever cleared by reveal.js,
-    // so if that script fails to load the page would stay blank forever. Drop the class
-    // if nothing has claimed it shortly after load.
+    // Watchdog: the hidden state is only ever cleared by reveal.js, so if that script fails
+    // to load the page would stay blank forever.
     setTimeout(function () {
       if (!root.hasAttribute("data-reveal-ready")) {
         root.classList.remove("reveal-enabled");
@@ -56,25 +52,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Alice&family=Rakkas&display=swap" rel="stylesheet">
-{% comment %}
-  Top-level pages carry their full tab title in front matter. Blog posts keep the site
-  name as a suffix, since the post title alone says nothing about whose site it is.
-{% endcomment %}
+{% comment %} Posts keep the site name as a suffix; top-level pages set their full tab title in front matter {% endcomment %}
 <title>{% if page.layout == "blog-post" %}{{ page.title }} · {{ site.title }}{% else %}{{ page.title | default: site.title }}{% endif %}</title>
 <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 {% if page.layout == "blog-post" %}
 <script>
   window.MathJax = {
     tex: {
-      // No single-$ delimiter on purpose. Kramdown already turns $$..$$ into \(..\)
-      // and \[..\] before MathJax runs, so math still works — and it leaves a lone $
-      // alone, which means currency in prose needs no escaping.
+      // No single-$ delimiter on purpose: kramdown already converts $$..$$ to \(..\) and
+      // \[..\] before MathJax runs, so a lone $ stays literal and currency needs no escaping.
       inlineMath: [['\\(', '\\)']],
       displayMath: [['$$', '$$'], ['\\[', '\\]']]
     },
-    // Not on by default. Lets prose blocks opt out of math parsing — preview cards carry
-    // post descriptions, where a pair of plain dollar amounts would otherwise be eaten
-    // and typeset as an equation.
+    // Lets prose opt out of math parsing via .tex2jax_ignore — preview cards carry post
+    // descriptions, where two plain dollar amounts would otherwise be typeset as an equation.
     options: { ignoreHtmlClass: 'tex2jax_ignore' },
     svg: { fontCache: 'global' }
   };
