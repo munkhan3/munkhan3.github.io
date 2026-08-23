@@ -18,7 +18,7 @@ That's some pretty handwavy logic though. Where do you draw the line at being "q
 
 <h3>Well... What Should We Expect?</h3>
 
-Right now, a `DUKE: YES` contract costs ~$$20\textrm{¢}$$ on Kalshi and pays out $$\$1$$ if Duke wins but $$\$0$$ if they don't. In other words, you'd make $$80\textrm{¢}$$ if Duke wins but lose $$20\textrm{¢}$$ if they don't. Let's try to set our threshold based on this. We just need to be confident enough to _expect_ a profit from our investment. If we believe that we'll win $$80\textrm{¢}$$ with probability $$p$$ and lose $$20\textrm{¢}$$ with probability $$1-p$$, then our expected profit would be...
+Right now, a `DUKE: YES` contract costs ~$$20\textrm{¢}$$ on Kalshi and pays out $$\$1$$ if Duke wins but $$\$0$$ if they don't. In other words, you'd make $$80\textrm{¢}$$ if Duke wins but lose $$20\textrm{¢}$$ if they don't. Let's try to set our threshold based on this. We just need to be confident enough to _expect_ a profit from our investment. If we believe that we'll win $$80\textrm{¢}$$ with probability $$p$$ and lose $$20\textrm{¢}$$ with probability $$1-p$$, then our expected profit would be...[^3]
 
 $$
 p \cdot \$0.80 - (1-p) \cdot \$0.20
@@ -30,7 +30,7 @@ $$
 \mathbb{E}[X] = p \cdot \$0.80 - (1-p) \cdot \$0.20 > 0
 $$
 
-We find that $$p > 0.20$$, which means we should only bet if we believe there's more than a $$20\%$$ chance Duke wins it all. If not, there's no point because the contract is **_too expensive for what we expect it to return_**.[^2] Hopefully that's a more satisfactory answer.[^3]
+We find that $$p > 0.20$$, which means we should only bet if we believe there's more than a $$20\%$$ chance Duke wins it all. If not, there's no point because the contract is **_too expensive for what we expect it to return_**.[^2] Hopefully that's a more satisfactory answer.
 
 <h3>Coincidence? I Think Not</h3>
 

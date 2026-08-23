@@ -389,6 +389,57 @@ main { min-height: 60vh; padding-bottom: 4rem; }
 
 .footnotes li p { margin: 0; }
 
+/* Margin notes
+   footnotes.js copies each footnote next to its marker; see there for the three placements.
+   Defaults to the popup, which footnotes.js positions inline — the margin and phone rules
+   below are reached by clearing those inline values, so they need no !important. */
+.post-content { position: relative; }
+
+.sidenote {
+  position: absolute;
+  left: 0;
+  width: 250px;
+  max-width: calc(100% - 2rem);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 8px 8px 0;
+  box-shadow: var(--shadow-raised);
+  padding: 0.8rem 0.95rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-style: normal;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Interactive once open, so links inside a note can be reached and its text selected */
+.sidenote.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+}
+
+.sidenote p { margin: 0; }
+.sidenote p + p { margin-top: 0.5rem; }
+
+/* Wide enough that the note clears the text column: 760px of column plus a 230px note and
+   its gap on the right. Below this it stays a popup. */
+@media (min-width: 1240px) {
+  .sidenote {
+    left: calc(100% + 20px);
+    width: 230px;
+    max-width: none;
+  }
+}
+
 /* Post preview hover link */
 .post-preview-link {
   position: relative;
@@ -943,6 +994,20 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
     margin-bottom: 0;
     transform: translateY(8px);
   }
+
+  /* Same treatment for margin notes: a sheet at the bottom edge rather than a card that
+     would have nowhere to sit beside a phone-width column. */
+  .sidenote {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    top: auto;
+    width: auto;
+    max-width: none;
+    border-radius: 8px;
+    transform: translateY(8px);
+  }
 }
 
 @media (max-width: 480px) {
@@ -958,6 +1023,7 @@ mjx-container { overflow-x: auto; overflow-y: hidden; }
   .blog-intro-quote,
   .tag-dropdown-chevron,
   .post-preview-card,
+  .sidenote,
   .theme-toggle { transition: none; }
   .site-nav-brand:hover { transform: translateY(4px); }
   .blog-intro-quote:hover { transform: none; }

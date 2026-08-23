@@ -19,3 +19,5 @@ layout: default
     {{ content }}
   </div>
 </article>
+{% comment %} Must run before MathJax so any math inside a note is typeset with the page {% endcomment %}
+<script src="{{ '/assets/js/footnotes.js' | relative_url }}" defer></script>
