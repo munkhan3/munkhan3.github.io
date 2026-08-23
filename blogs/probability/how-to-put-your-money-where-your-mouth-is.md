@@ -1,5 +1,5 @@
 ---
-title: "Putting Your Money Where Your Mouth Is"
+title: "How To: Put Your Money Where Your Mouth Is"
 date: 2026-03-16
 tags: [probability, prediction markets, expected value]
 description: "Duke is winning it all this year. I wouldn't bet on it though."
@@ -16,7 +16,7 @@ If you're a college basketball fan and have strong opinions on whether Duke will
 
 That's some pretty handwavy logic though. Where do you draw the line at being "quite confident"? What exactly is a "good chance"? Some might suggest anything over $$50\%$$, but what if the bet is super expensive? You'd want to be more certain that your investment will pay off, so shouldn't it be higher? Similarly if the bet is super cheap, shouldn't the bar be lower? The intuition here is that the threshold you use to make your decision should depend on what the bet **_costs_**.
 
-<h3>Well...What Should We Expect?</h3>
+<h3>Well... What Should We Expect?</h3>
 
 Right now, a `DUKE: YES` contract costs ~$$20\textrm{¢}$$ on Kalshi and pays out $$\$1$$ if Duke wins but $$\$0$$ if they don't. In other words, you'd make $$80\textrm{¢}$$ if Duke wins but lose $$20\textrm{¢}$$ if they don't. Let's try to set our threshold based on this. We just need to be confident enough to _expect_ a profit from our investment. If we believe that we'll win $$80\textrm{¢}$$ with probability $$p$$ and lose $$20\textrm{¢}$$ with probability $$1-p$$, then our expected profit would be...
 
@@ -34,7 +34,7 @@ We find that $$p > 0.20$$, which means we should only bet if we believe there's 
 
 <h3>Coincidence? I Think Not</h3>
 
-If you've been paying attention (you've gotten this far so I assume you are), you'll point out that the threshold is exactly the price. This is not at all a coincidence -- it's a direct result of the fact that the payout is $1. The most you can ever win is $1, so the expected value of the contract in dollars _is_ the probability that it pays out.
+If you've been paying attention (you've gotten this far so I assume you are), you'll point out that the threshold is exactly the price. This is not at all a coincidence -- it's a direct result of the fact that the payout is $$\$1$$. The most you can ever win is $$\$1$$, so the expected value of the contract in dollars _is_ the probability that it pays out.
 
 $$
 \begin{aligned}
@@ -63,7 +63,7 @@ The probability that we determine by leveraging the collective expectation of th
 
 <h3>Ok, Cool Math... So What?</h3>
 
-Now that you can estimate what the market prices imply, you can use the same thresholding logic as before to make decisions. If the market implied probability of an event is 75% but you believe there's only a 60% chance, then the market (in your view) is _mispriced_ and you can take advantage of it. In the `AAPL` case, you'd sell shares because you're saying the $100 outcome is more likely than the market says it is. If instead you think the chances are higher, then you do the opposite and buy. Either way, if you use this logic to make your trades and _your probability is more accurate than the implied probability_, you can expect to profit.
+Now that you can estimate what the market prices imply, you can use the same thresholding logic as before to make decisions. If the market implied probability of an event is $$75\%$$ but you believe there's only a $$60\%$$ chance, then the market (in your view) is _mispriced_ and you can take advantage of it. In the `AAPL` case, you'd sell shares because you're saying the $$\$100$ outcome is more likely than the market says it is. If instead you think the chances are higher, then you do the opposite and buy. Either way, if you use this logic to make your trades and _your probability is more accurate than the implied probability_, you can expect to profit.
 
 This assumption is quite a big one though. The whole point of an implied probability is that it reflects what a lot of people with a lot of information have collectively settled on. If you think the market is mispriced, you are effectively saying that your information is _better_ in some way. When this assumption is true, the improvement in information is called **_edge_**. Finding, verifying, and exploiting it is basically the entire game.
 
