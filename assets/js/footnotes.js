@@ -18,6 +18,8 @@
   var PHONE = window.matchMedia("(max-width: 600px)");
   var TOUCH = window.matchMedia("(hover: none)");
   var TAP_WINDOW = 10000;
+  var LINGER_MARGIN = 3000;
+  var LINGER_NEAR = 220;
 
   var pairs = [];
   var open = null;
@@ -44,6 +46,8 @@
 
   function place(pair) {
     var note = pair.note;
+    note.classList.remove("sidenote-left", "sidenote-right");
+
     // Phone placement is a fixed sheet, entirely CSS. Clearing the inline values left by a
     // previous popup is what lets those rules apply.
     if (PHONE.matches) {
@@ -54,10 +58,16 @@
     var box = content.getBoundingClientRect();
     var mark = pair.ref.getBoundingClientRect();
     if (MARGIN.matches) {
-      // Aligned with the marker's own line. Only `left` comes from CSS here — leaving `top`
-      // unset would drop the note at its static position, the far end of the post.
+      // Aligned with the marker's own line. Only the horizontal side comes from CSS here —
+      // leaving `top` unset would drop the note at its static position, the far end of
+      // the post.
       note.style.top = mark.top - box.top - 4 + "px";
       note.style.left = "";
+      // The note goes in whichever margin the marker is nearer, so the eye travels the
+      // shorter distance. Both margins are the same width, the column being centred, so
+      // one breakpoint covers either side.
+      var onLeft = mark.left + mark.width / 2 < window.innerWidth / 2;
+      note.classList.add(onLeft ? "sidenote-left" : "sidenote-right");
       return;
     }
     note.style.top = mark.bottom - box.top + 10 + "px";
@@ -85,11 +95,13 @@
     open = null;
   }
 
-  // Notes can carry links, so the pointer has to be able to cross the gap into one without
-  // the marker's mouseleave closing it on the way.
+  // Notes can carry links, so the pointer has to be able to reach one without the marker's
+  // mouseleave closing it on the way. A margin note is a deliberate trip across the gutter,
+  // well past the few hundred ms that bridging a popup sitting under the marker needs — and
+  // it costs nothing to leave up, being clear of the text either way.
   function hideSoon() {
     clearTimeout(hideTimer);
-    hideTimer = setTimeout(hide, 220);
+    hideTimer = setTimeout(hide, MARGIN.matches ? LINGER_MARGIN : LINGER_NEAR);
   }
 
   pairs.forEach(function (pair) {

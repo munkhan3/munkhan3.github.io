@@ -138,6 +138,11 @@ hr { border: none; border-top: 1px solid var(--color-border); margin: 2rem 0; }
 
 main { min-height: 60vh; padding-bottom: 4rem; }
 
+/* A post ends on the footnote list, which already reads as a closing block, so it does not
+   need the full site gutter above the footer. 2.5rem lands the gap below the list a little
+   wider than the 2rem rule above it, so the block closes rather than feeling clipped. */
+.main-post { padding-bottom: 2.5rem; }
+
 /* Footer */
 .site-footer {
   display: flex;
@@ -389,6 +394,11 @@ main { min-height: 60vh; padding-bottom: 4rem; }
 
 .footnotes li p { margin: 0; }
 
+/* Nothing follows the note list, so its trailing margin is dead space. Both are needed:
+   the last li's margin would otherwise just collapse through the ol in its place. */
+.footnotes ol { margin-bottom: 0; }
+.footnotes li:last-child { margin-bottom: 0; }
+
 /* Margin notes
    footnotes.js copies each footnote next to its marker; see there for the three placements.
    Defaults to the popup, which footnotes.js positions inline — the margin and phone rules
@@ -397,6 +407,11 @@ main { min-height: 60vh; padding-bottom: 4rem; }
 
 .sidenote {
   position: absolute;
+  /* Pinned rather than left at its static position. A hidden note still takes part in
+     layout, and at the static position — the end of the post, where it is appended — the
+     tallest one overhung the footer and added dead scroll to the page. footnotes.js
+     overwrites this with the real offset before showing the note. */
+  top: 0;
   left: 0;
   width: 250px;
   max-width: calc(100% - 2rem);
@@ -431,12 +446,23 @@ main { min-height: 60vh; padding-bottom: 4rem; }
 .sidenote p + p { margin-top: 0.5rem; }
 
 /* Wide enough that the note clears the text column: 760px of column plus a 230px note and
-   its gap on the right. Below this it stays a popup. */
+   its gap either side. Below this it stays a popup. footnotes.js picks the side per marker,
+   so a note never crosses the column to reach its own reference. */
 @media (min-width: 1240px) {
   .sidenote {
-    left: calc(100% + 20px);
     width: 230px;
     max-width: none;
+  }
+
+  .sidenote-right { left: calc(100% + 20px); }
+
+  /* Mirrored, so the accent edge always faces the text it belongs to */
+  .sidenote-left {
+    left: auto;
+    right: calc(100% + 20px);
+    border-left: 1px solid var(--color-border);
+    border-right: 3px solid var(--color-accent);
+    border-radius: 8px 0 0 8px;
   }
 }
 

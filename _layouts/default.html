@@ -5,7 +5,8 @@
 </head>
 <body>
   {% include nav.html %}
-  <main>
+  {% comment %} Posts end on the note list, which needs less room above the footer than the other pages do {% endcomment %}
+  <main{% if page.layout == "blog-post" %} class="main-post"{% endif %}>
     {{ content }}
   </main>
   {% include footer.html %}
