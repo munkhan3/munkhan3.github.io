@@ -1,0 +1,57 @@
+<!doctype html>
+<!--
+  Source for /assets/img/og-card.png — the link-preview card.
+  Not built by Jekyll: directories starting with _ are excluded.
+
+  Regenerate after editing (renders at 2x, then downsamples for cleaner antialiasing):
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=2 \
+      --virtual-time-budget=8000 --window-size=1200,630 \
+      --screenshot=/tmp/og@2x.png "file://$PWD/_og/card.html"
+    sips -s format png -z 630 1200 /tmp/og@2x.png --out assets/img/og-card.png
+
+  1200x630 is the size every scraper expects. Keep it exact — og:image:width/height in
+  head.html are hardcoded to match, and a mismatch makes some clients skip the image.
+
+  Swap the two custom properties below for the light variant:
+    --card-bg: #faf6f0;  --card-fg: #b5502e;
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --card-bg: #16130f;
+    --card-fg: #e08a63;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+
+  .card {
+    width: 1200px;
+    height: 630px;
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Rakkas sits low in its em box, so nudge up to land optically centred */
+  .logo {
+    font-family: "Rakkas", serif;
+    font-size: 300px;
+    line-height: 1;
+    color: var(--card-fg);
+    transform: translateY(-0.06em);
+  }
+</style>
+</head>
+<body>
+  <div class="card"><span class="logo">منير</span></div>
+</body>
+</html>
