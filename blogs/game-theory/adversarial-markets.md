@@ -5,6 +5,8 @@ tags: [game-theory, prediction-markets, poker]
 description: "Do you know more than your opponent? Are you sure? *Are you sure?*"
 keywords:
   [kalshi, adverse, adversarial, asymmetry, information, poker, asymmetric]
+draft: true
+published: true
 ---
 
 We have {% include post-preview-link.html path="blogs/probability/prediction-markets.md" text="talked previously" %} about how prediction markets are closer to stock markets than betting markets. You name a price, Kalshi checks its book, and either you take someone's offer or yours gets added there until somebody else takes it. Either way, since you're not taking up positions against Kalshi, it's technically not gambling -- in the legal sense of the word.[^1]

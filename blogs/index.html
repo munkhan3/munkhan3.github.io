@@ -14,6 +14,16 @@ description: "Writing on probability, game theory, and prediction markets."
   {% assign posts = site.pages | where_exp: "p", "p.path contains 'blogs/'" %}
   {% assign posts = posts | where_exp: "p", "p.path != page.path" %}
   {% assign posts = posts | where_exp: "p", "p.title" %}
+  {% comment %}
+    Two ways to keep a post off the site:
+      draft: true      — still builds at its URL (and carries a noindex meta and a "Draft"
+                         badge), but appears in no listing. Good for sharing a preview link.
+      published: false — Jekyll builds no page at all. Preview locally with
+                         `bundle exec jekyll serve --unpublished`.
+    Pages with no `draft` key have a nil value, which satisfies `!= true`. This runs before
+    the topic loop below so a category whose only posts are drafts leaves the dropdown too.
+  {% endcomment %}
+  {% assign posts = posts | where_exp: "p", "p.draft != true" %}
   {% assign posts = posts | sort: "date" | reverse %}
 
   {% assign topic_string = "" %}

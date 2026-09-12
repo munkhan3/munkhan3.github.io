@@ -4,6 +4,8 @@ date: 2026-03-16
 tags: [probability, prediction markets, expected value]
 description: "Duke is winning it all this year. I wouldn't bet on it though."
 keywords: [kalshi, duke basketball, march madness, betting odds]
+draft: false
+published: true
 ---
 
 <h3>The Big Dance</h3>

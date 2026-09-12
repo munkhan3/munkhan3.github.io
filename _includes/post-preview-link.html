@@ -9,8 +9,12 @@
   mid-sentence, and a stray newline would show up as a space before the link.
 {%- endcomment -%}
 {%- if include.latest -%}
-  {%- comment -%} Filtering on date rather than layout keeps the blog index, which has none, out of the running {%- endcomment -%}
-  {%- assign candidates = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.date" | where_exp: "p", "p.title" | sort: "date" -%}
+  {%- comment -%}
+    Filtering on date rather than layout keeps the blog index, which has none, out of the
+    running, and `p.draft != true` keeps unfinished posts out of it. Naming a draft
+    explicitly by path is still allowed — that is a deliberate act.
+  {%- endcomment -%}
+  {%- assign candidates = site.pages | where_exp: "p", "p.path contains 'blogs/'" | where_exp: "p", "p.date" | where_exp: "p", "p.title" | where_exp: "p", "p.draft != true" | sort: "date" -%}
   {%- assign target = candidates | last -%}
 {%- else -%}
   {%- assign target = site.pages | where: "path", include.path | first -%}

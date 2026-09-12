@@ -4,6 +4,7 @@ date: 2026-07-05
 tags: [probability, foundations]
 description: "Why the sample mean of i.i.d. random variables converges to a normal distribution as n grows, regardless of the underlying distribution."
 keywords: [central limit theorem, sample mean, gaussian, confidence intervals]
+published: false
 ---
 
 Let $$X_1, X_2, \dots, X_n$$ be i.i.d. random variables with mean $$\mu$$ and finite variance $$\sigma^2$$. Define the sample mean:

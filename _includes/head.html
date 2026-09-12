@@ -70,6 +70,10 @@
 {%- endif -%}
 {%- assign og_desc = page.description | default: site.description | markdownify | strip_html | normalize_whitespace | strip -%}
 {%- assign og_image = page.image | default: "/assets/img/og-card.png" %}
+{%- if page.draft %}
+{%- comment %} Unfinished post: still served at its URL so it can be previewed and shared, but kept out of search results {% endcomment %}
+<meta name="robots" content="noindex, nofollow">
+{% endif -%}
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <meta name="description" content="{{ og_desc | escape_once }}">
 <meta property="og:type" content="{{ og_type }}">
