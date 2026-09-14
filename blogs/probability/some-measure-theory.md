@@ -4,7 +4,8 @@ date: 2026-01-03
 tags: [probability, measure theory, introduction]
 description: "If you like math and have ever been uncertain about anything, you will probably enjoy this."
 keywords: [measure, theory, probability, sigma, algebra, outcome, theory]
-draft: true
+draft: false
+published: true
 ---
 
 It's useful to think about any situation that carries uncertainty as a **_probability space_**. It is even more useful -- for our purposes -- to think about probability spaces as models built on top of a **_measurable space_**. By that, I mean that there exists some objective mathematical description of everything that a random process _could_ do. **Crucially, any individual observer may not have the complete picture.** Different observers might see different parts of this picture, and thus may have different interpretations of the same process.
@@ -58,21 +59,67 @@ $$
 When we add this third component to the measurable space $$(\Omega, \mathcal{F})$$ we end up with a **probability space** $$(\Omega, \mathcal{F}, \mathbb{P})$$.
 
 <h3>A Whole Bunch of Greek</h3>
-It's important to note that $$\mathbb{P}$$ is defined on _all_ of $$\mathcal{F}$$. This implies that every (well-posed) question about our random process has an answer. However, whether any particular observer *knows enough to answer* depends on the information they have. ***Sub-$$\boldsymbol \sigma$$-algebras*** allow us to formalize that gap between _truth_ and _knowledge_.
+
+It's important to note that $$\mathbb{P}$$ is defined on _all_ of $$\mathcal{F}$$. This implies that every (well-posed) question about our random process has an answer. However, whether any particular observer _knows enough to answer_ depends on the information they have. **Sub-$$\boldsymbol \sigma$$-algebras** allow us to formalize that gap between _truth_ and _knowledge_.
 
 Consider any arbitrary $$\sigma$$-algebra $$\mathcal{G}$$ on the outcome space $$\Omega$$. We call $$\mathcal{G}$$ a sub-$$\sigma$$-algebra of $$\mathcal{F}$$ if $$\mathcal{G} \subseteq \mathcal{F}$$. How can we use this to encode the information held by a particular observer?
 
-> Recall our example from earlier, where we're interested in two flips of a fair coin. Suppose I have already flipped the coins and looked at one of them. You have seen neither. We have different information, and thus should have different sub-$$\sigma$$-algebras.
+> Recall our example from earlier, where we're interested in two flips of a fair coin. Suppose the coins have already been flipped, and you've been allowed to look at one of them.[^3] I have seen neither. We have different information, and thus should have different sub-$$\sigma$$-algebras.
 
-In the context of information, we can interpret sub-$$\sigma$$-algebras as sets of information that we can distinguish. Let's call my sub-$$\sigma$$-algebra $$\mathcal{G}^{(1)}$$ and your sub-$$\sigma$$-algebra $$\mathcal{G}^{(2)}$$.
+To build an intuition for these objects, it will help to manually construct them. We can do this by thinking about how information induces **_partitions_** the outcome space. In my case, I can't make any statements about where in $$\Omega$$ the true outcome lies because I haven't seen any of the flips -- all I know is that the outcome is somewhere in $$\Omega$$. In other words, I can't partition $$\Omega$$ at all. Formally, we can write this as the trivial partition...
 
-<h3>Back to Probability</h3>
-This is the toolkit that allows us to quantify uncertainty of any situation. In general, the procedure that we follow involves listing out all of the outcomes $$\Omega$$, constructing an event space $$\mathcal{F}$$, and then using $$\mathbb{P}$$ to identify the probability of any event of interest.
+$$
+\require{mathtools}
+\mathcal{P}_{1} \coloneqq \{\{HH, HT, TH, TT\}\} = \{\Omega\}
+$$
 
-<h3>PLACEHOLDER</h3>
+On the other hand, since you know the value of the first flip, you can identify whether the true outcome is in $$\{HH, HT\}$$ or $$\{TH, TT\}$$. Thus, the partition induced by your information is...
+
+$$
+\require{mathtools}
+\mathcal{P}_{2} \coloneqq \{\{HH, HT\}, \{TH, TT\}\}
+$$
+
+In game theory, we call $$\mathcal{P}_{k}$$ the **_information structure_** of the $$k$$-th agent. Formally, the **_information set_** of the $$k$$-th agent is the particular subset of $$\mathcal{P}_{k}$$ that the $$k$$-th agent can identify as containing the realized outcome based on their information. In this example, if you saw that the first coin was $$H$$, your information set would be $$\{HH, HT\}$$. If you saw that the first coin was $$T$$, your information set would be $$\{TT, TH\}$$. Unfortunately, since I saw no coins, my information set would be $$\{HH, HT, TT, TH\}$$.
+
+Constructing the sub-$$\sigma$$-algebras $$\mathcal{G}_{k}$$ from here is quite easy. The process here is a bit informal, but the idea is that $$\mathcal{G}_{k}$$ is all possible unions of the sets in the information structure $$\mathcal{P}_{k}$$ _and_ the empty set. So we have...
+
+$$
+\require{mathtools}
+\begin{align*}
+\mathcal{G}_{1} &\coloneqq \{\varnothing, \Omega\} \\
+
+\mathcal{G}_{2} &\coloneqq \{\varnothing, \{HH, HT\}, \{TH, TT\}, \Omega\}
+\end{align*}
+$$
+
+The idea is that **information structures tell us (in some sense), how _blurry_ the outcome space looks to each agent. The corresponding sub-$$\boldsymbol \sigma$$-algebra contains all of the events we can construct from those distinctions** and therefore all of the questions we can definitively answer given our information.
+
+<h3>Some Thoughts on Time Travel</h3>
+
+So far, we have talked about how we can use probability spaces and sub-$$\sigma$$-algebras to show how information varies across agents. Another important concept that this formalization allows us to develop is the idea of _**information evolving over time for just one observer**_.
+
+In our previous example, you and I are separate observers with different information. In particular, your information _supersets_ my information...
+
+$$
+\mathcal{G}_{1} \subset \mathcal{G}_{2}
+$$
+
+Given this structure, we can instead imagine _one_ observer viewing two flips of a fair coin that proceed sequentially. At first, the observer sees no flips and has sub-$$\sigma$$-algebra $$\mathcal{G}_{1}$$. Once the first coin is flipped, the observer has sub-$$\sigma$$-algebra $$\mathcal{G}_{2}$$. Once the second coin is flipped, the observer can partition the outcome space on every individual outcome so we have $$\mathcal{G}_3 = \mathcal{F}$$. Notice that this is an sequence of $$\sigma$$-algebras _indexed by time_...
+
+$$
+\require{mathtools}
+\{\mathcal{G}_t\}_{t=1}^3 \coloneqq \{\mathcal{G}_1, \mathcal{G}_2, \mathcal{G}_3\} \quad \textrm{with} \quad \mathcal{G}_{1} \subset \mathcal{G}_{2} \subset \mathcal{G}_3 = \mathcal{F}
+$$
+
+We call any non-decreasing sequence of $$\sigma$$-algebras _indexed by time_ a **_filtration_**. Over time, our ability to distinguish between the possible outcomes should become more precise as we gather more information.[^4] As a result, our sub-$$\sigma$$-algebra should get larger. This concept is quite important in fields like quantitative trading, where an observer must dynamically update their predictions / valuations as quickly as possible as new information is received.
 
 ---
 
-[^1]: Unfortunately, the power set $$2^\Omega$$ is not always a valid $$\sigma$$-algebra for the measurable space of a random process. This is particularly an issue when we get to dealing with continuous outcome spaces, where it becomes impossible to assign probabilities to events without contradictions. The solution to this involves something called a **_Borel $$\boldsymbol \sigma$$-algebra_**. Don't worry, we'll discuss this soon.
+[^1]: Unfortunately, the power set $$2^\Omega$$ is not always a valid $$\sigma$$-algebra for the measurable space of a random process. This is particularly an issue when we get to dealing with continuous outcome spaces, where it becomes impossible to assign probabilities to events without contradictions. The solution to this involves something called a **_Borel $$\boldsymbol \sigma$$-algebra_**.
 
 [^2]: A collection of pairwise disjoint events is just any set of events such that the events do not share any elements. Formally, we write $$\{A_k\}$$ such that $$A_i \cap A_j = \varnothing$$ for all $$i \neq j$$.
+
+[^3]: There's technically a [very sneaky issue](https://en.wikipedia.org/wiki/Boy_or_girl_paradox) with this phrasing. To avoid this issue here, we'll assume that the coins were flipped in sequence and I looked at the first coin.
+
+[^4]: I use the word "should" because we assume no misinformation here. It's not necessarily the case in reality that everything we colloquially refer to as "information" is quality signal as opposed to noise.
