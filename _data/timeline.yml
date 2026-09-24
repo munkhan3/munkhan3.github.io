@@ -31,9 +31,11 @@
     [
       "Probabilistic Modeling",
       "Revenue Forecasting",
-      "Bayesian Inference",
+      "Causal Inference",
       "Experimental Design",
+      "Hypothesis Testing",
       "Pricing Strategy",
+      "Bayesian Inference",
       "MLOps",
       "Python",
       "SQL",
@@ -47,7 +49,7 @@
   logo: "/assets/img/uchicago-logo.svg"
   location: "Chicago, IL"
   bullets:
-    - "Algorithmic Game Theory, Modern Applied Statistics, Time Series, Options Theory, Applied Linear Statistical Models"
+    - "Algorithmic Game Theory, Bayesian Statistics, Time Series, Options Theory, Applied Linear Models"
 
 - date: "May 2024 – Sep. 2025"
   category: "research"
